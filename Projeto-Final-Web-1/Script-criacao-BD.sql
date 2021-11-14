@@ -1,0 +1,53 @@
+CREATE TABLE USUARIO 
+( 
+ id Integer PRIMARY KEY,  
+ administrador BOOLEAN NOT NULL,  
+ endereco VARCHAR(n) NOT NULL,  
+ nome VARCHAR(100) NOT NULL,  
+ email VARCHAR(50) NOT NULL,  
+ login VARCHAR(50) NOT NULL,  
+ senha VARCHAR(20) NOT NULL,  
+); 
+
+CREATE TABLE VENDA 
+( 
+ id Integer PRIMARY KEY,  
+ data_hora TIMESTAMP NOT NULL,  
+ id_usuario INT NOT NULL,  
+); 
+
+CREATE TABLE CATEGORIA 
+( 
+ descricao VARCHAR(100) NOT NULL,  
+ id Integer PRIMARY KEY,  
+); 
+
+CREATE TABLE PRODUTO 
+( 
+ id Integer PRIMARY KEY,  
+ quantidade Integer NOT NULL,  
+ foto VARCHAR(200),  
+ preco FLOAT NOT NULL,  
+ descricao VARCHAR(100) NOT NULL,  
+); 
+
+CREATE TABLE VENDA_PRODUTO 
+( 
+ quantidade Integer NOT NULL,  
+ id_venda INT PRIMARY KEY,  
+ id_produto Integer PRIMARY KEY,  
+); 
+
+CREATE TABLE PRODUTO_CATEGORIA 
+( 
+ id_produto Integer PRIMARY KEY,  
+ id_categoria Integer PRIMARY KEY,  
+); 
+
+ALTER TABLE VENDA ADD FOREIGN KEY(id_usuario) REFERENCES USUARIO (id);
+ALTER TABLE VENDA_PRODUTO ADD FOREIGN KEY(id_venda) REFERENCES PRODUTO (id);
+ALTER TABLE VENDA_PRODUTO ADD FOREIGN KEY(id_produto) REFERENCES VENDA (id);
+ALTER TABLE PRODUTO_CATEGORIA ADD FOREIGN KEY(id_produto) REFERENCES PRODUTO (id);
+ALTER TABLE PRODUTO_CATEGORIA ADD FOREIGN KEY(id_categoria) REFERENCES CATEGORIA (id);
+
+
