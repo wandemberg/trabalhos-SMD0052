@@ -1,4 +1,5 @@
 # trabalhos-SMD0052
+Autor: Wandemberg Gomes
 
 Parte 1 da entrega do trabalho final de SMD0052: <br>
 https://drive.google.com/drive/folders/1UieWDnm7cgT-EvGyQ-zi9ulPLJTAJvtq?usp=sharing
