@@ -12,7 +12,7 @@ https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/en
 – Modelo lógico. <br>
 https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/entrega-parte-1/tabelas-trabalho-final-entrega-1.pdf <br>
 – Um vídeo que mostre e explique a proposta do front-end do Trabalho Final. <br>
-https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/entrega-parte-1/video1334210315.mp4 <br>
+https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/entrega-parte-1/video1476806457.mp4 <br>
 <br><br>
 Estão no projeto do Eclipse: <br>
 – Script DDL de criação do Banco de Dados, Tabelas, colunas, chaves primárias (PKs) e estrangeiras (FKs). <br>
