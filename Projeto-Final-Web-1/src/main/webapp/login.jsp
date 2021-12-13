@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +17,12 @@
   <div class="imgcontainer">
     <img src="resources/images/e-commerce-e-loja-virtual.png" alt="Avatar" class="avatar">
   </div>
+
+	<% if (request.getAttribute("mensagem") != null) { %>
+        <hr/>
+        <div><%= request.getAttribute("mensagem") %></div>
+        <% } %>
+       <hr/>
 
   <div class="container">
     <label for="uname"><b>Usuário</b></label>
