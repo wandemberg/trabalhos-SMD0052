@@ -77,6 +77,11 @@
 			</div>
 		</div><!--/header-middle-->
 	
+		<% if (request.getAttribute("mensagem") != null) { %>
+        <hr/>
+        <div><%= request.getAttribute("mensagem") %></div>
+        <% } %>
+       	<hr/>
 	</header>
 	
 	<section id="advertisement">

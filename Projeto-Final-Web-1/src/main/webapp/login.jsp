@@ -42,7 +42,7 @@
   </div>
 
   <div class="container" style="background-color:#f1f1f1">
-    <span class="psw">Cliente Novo? <a href="cadastrar-usuario.html">Cadastrar</a></span>    
+    <span class="psw">Cliente Novo? <a href="cadastrar-usuario.jsp">Cadastrar</a></span>    
   </div>
 </form>
 

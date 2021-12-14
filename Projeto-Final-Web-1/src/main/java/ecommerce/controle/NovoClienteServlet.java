@@ -41,7 +41,7 @@ public class NovoClienteServlet extends HttpServlet {
         }
         /* saída */
         request.setAttribute("mensagem", mensagem);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("compras.jsp");
         requestDispatcher.forward(request, response);
     }
 
