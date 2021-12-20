@@ -26,6 +26,7 @@ public class NovoClienteServlet extends HttpServlet {
         String email = request.getParameter("email");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
+        
         boolean administrador = false;
         /* processamento */
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -34,7 +35,7 @@ public class NovoClienteServlet extends HttpServlet {
         try {
             usuarioDAO.inserir(nome, endereco, email, login, senha, administrador);
             inseriu = true;
-            mensagem = "Cliente inserido com sucesso";
+            mensagem = "Cadastro realizado com sucesso!";
         } catch (Exception ex) {
             inseriu = false;
             mensagem = ex.getMessage();
