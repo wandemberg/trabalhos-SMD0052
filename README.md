@@ -1,5 +1,15 @@
 # trabalhos-SMD0052
-Autor: Wandemberg Gomes
+Autor: Wandemberg Gomes <br><br>
+– Link para acessar a aplicação: <br>
+http://localhost:8080/Projeto-Final-Web-1/compras.jsp
+
+<h3>Parte 2 do trabalho final.</h3>
+
+– Um documento com nomes dos integrantes da equipe. <br>
+https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/entrega-parte-2/Trabalho%20Final%20-%20Parte%202.pdf <br>
+
+
+<h3>Parte 1 do trabalho final.</h3>
 
 Parte 1 da entrega do trabalho final de SMD0052: <br>
 https://github.com/wandemberg/trabalhos-SMD0052/tree/main/Projeto-Final-Web-1/entrega-parte-1 <br>
