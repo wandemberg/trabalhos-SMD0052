@@ -3,8 +3,8 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 form {border: 3px solid #f1f1f1;}
 
-h2 {color: blue;
-text-align: center;
+h2 {color: #FE980F;
+	text-align: center;
 }
 
 input[type=text], input[type=password] {
@@ -17,7 +17,7 @@ input[type=text], input[type=password] {
 }
 
 button {
-  background-color: #04AA6D;
+  background-color: #FE980F;
   color: white;
   padding: 10px 18px;
   margin: 8px 0;
