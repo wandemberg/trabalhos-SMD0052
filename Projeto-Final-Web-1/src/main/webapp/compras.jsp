@@ -45,9 +45,9 @@
 					<div class="col-sm-6 ">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-							<%if (usuario != null) { %>
-								<li><a href=""> Bem-vindo, <%= usuario.getNome()%></a></li>
-								<li><a href=""> <%= usuario.getEmail()%></a></li>
+								<%if (usuario != null) { %>
+									<li><a href="compras.jsp"> Bem-vindo, <%= usuario.getNome()%>!</a></li>
+									<li><a href="compras.jsp"> <%= usuario.getEmail()%></a></li>
 								<%} %>
 							</ul>
 						</div>
@@ -69,12 +69,13 @@
 					<div class="col-md-8 clearfix">
 						<div class="shop-menu clearfix pull-right">
 							<ul class="nav navbar-nav">
-								<%if (usuario != null) { %>							
-									<li><a href="Logout"> Sair</a></li>
+								<%if (usuario == null) { %>
+									<li><a href="cadastrar-usuario.jsp"> Crie a sua conta</a></li>																
+									<li><a href="login.jsp"> Entre</a></li>
 								<%} %>
 								<li><a href="carinho-compras.jsp"> Carrinho</a></li>
-								<%if (usuario == null) { %>								
-									<li><a href="login.jsp"> Login</a></li>
+								<%if (usuario != null) { %>							
+									<li><a href="Logout"> Sair</a></li>
 								<%} %>
 							</ul>
 						</div>
