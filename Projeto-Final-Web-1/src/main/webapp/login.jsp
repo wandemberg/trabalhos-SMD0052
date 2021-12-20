@@ -34,11 +34,8 @@
 
 	<div class="btncontainer">        
     <button type="submit" >Login</button>
-    <button onclick="window.location.replace('compras.html');" type="button" class="cancelbtn">Cancelar</button>
+    <button onclick="window.location.replace('compras.jsp');" type="button" class="cancelbtn">Cancelar</button>
     </div>    
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Lembre-me
-    </label>
   </div>
 
   <div class="container" style="background-color:#f1f1f1">

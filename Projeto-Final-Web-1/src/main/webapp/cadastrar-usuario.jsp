@@ -33,12 +33,12 @@
      
     <div>   
 	    <button type="submit" >Cadastrar</button>
-	    <button onclick="window.location.replace('compras.html');" type="button" class="cancelbtn">Cancelar</button>
+	    <button onclick="window.location.replace('compras.jsp');" type="button" class="cancelbtn">Cancelar</button>
     </div>
   </div>
 
   <div class="container" style="background-color:#f1f1f1">
-    <span class="psw">Cliente já cadastrado? <a href="login.html">Login</a></span>    
+    <span class="psw">Cliente já cadastrado? <a href="login.jsp">Login</a></span>    
   </div>
 </form>
 </body>

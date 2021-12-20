@@ -1,10 +1,10 @@
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
-    if (usuario == null) {
+   /* if (usuario == null) {
         request.setAttribute("mensagem", "Você não tem uma sessão válida de usuário do tipo cliente");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
-    } else {
+    } else {*/
 %>
 <%@page import="ecommerce.modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -45,8 +45,10 @@
 					<div class="col-sm-6 ">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
+							<%if (usuario != null) { %>
 								<li><a href=""> Bem-vindo, <%= usuario.getNome()%></a></li>
 								<li><a href=""> <%= usuario.getEmail()%></a></li>
+								<%} %>
 							</ul>
 						</div>
 					</div>
@@ -67,20 +69,25 @@
 					<div class="col-md-8 clearfix">
 						<div class="shop-menu clearfix pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="checkout.html"> Sair</a></li>
-								<li><a href="cart.html"> Carrinho</a></li>
-								<li><a href="login.jsp"> Login</a></li>
+								<%if (usuario != null) { %>							
+									<li><a href="Logout"> Sair</a></li>
+								<%} %>
+								<li><a href="carinho-compras.jsp"> Carrinho</a></li>
+								<%if (usuario == null) { %>								
+									<li><a href="login.jsp"> Login</a></li>
+								<%} %>
 							</ul>
 						</div>
+						<% if (request.getAttribute("mensagem") != null) { %>
+        					<hr/>
+        					<div class="nav navbar-nav"><%= request.getAttribute("mensagem") %></div>
+        				<% } %>
 					</div>
 				</div>
 			</div>
 		</div><!--/header-middle-->
 	
-		<% if (request.getAttribute("mensagem") != null) { %>
-        <hr/>
-        <div><%= request.getAttribute("mensagem") %></div>
-        <% } %>
+
        	<hr/>
 	</header>
 	
@@ -441,5 +448,5 @@
 </body>
 </html>
 <%
-    }
+  //  }
 %>
