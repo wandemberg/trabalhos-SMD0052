@@ -5,6 +5,9 @@ http://localhost:8080/Projeto-Final-Web-1/compras.jsp
 
 <h3>Parte 2 do trabalho final.</h3>
 
+– Um vídeo que mostre e explique o estado atual do Trabalho Final. <br>
+https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/entrega-parte-2/video1020152804.mp4 <br>
+
 – Um documento com nomes dos integrantes da equipe. <br>
 https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/entrega-parte-2/Trabalho%20Final%20-%20Parte%202.pdf <br>
 
