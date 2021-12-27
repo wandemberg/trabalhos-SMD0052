@@ -57,3 +57,14 @@ ALTER TABLE PRODUTO_CATEGORIA ADD FOREIGN KEY(id_categoria) REFERENCES CATEGORIA
 
 insert into USUARIO values (1, true, 'Rua X, 111', 'wandemberg gomes', 
 'wandemberg.rodrigues@gmail.com', 'wandemberg', 'qwer1234');
+
+ insert into produto(id, quantidade, preco, descricao) 
+ values (1, 5, 1000, 'play 1');
+ insert into produto(id, quantidade, preco, descricao) 
+ values (2, 10, 2000, 'play 2');
+ insert into produto(id, quantidade, preco, descricao) 
+ values (3, 34, 3000, 'play 3');
+ insert into produto(id, quantidade, preco, descricao) 
+ values (4, 51, 4000, 'play 4');
+ insert into produto(id, quantidade, preco, descricao) 
+ values (5, 87, 5000, 'play 5');

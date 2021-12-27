@@ -1,8 +1,3 @@
-<%@page import="ecommerce.modelo.CarrinhoCompraItem"%>
-<%@page import="java.util.List"%>
-<%@page import="ecommerce.modelo.Produto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +32,7 @@
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
-				  <li><a href="Inicio">Home</a></li>
+				  <li><a href="#">Home</a></li>
 				  <li class="active">Carrinho de compras</li>
 				</ol>
 			</div>
@@ -54,66 +49,82 @@
 						</tr>
 					</thead>
 					<tbody>
-					
-						<%
-				            List<CarrinhoCompraItem> carrinhoCompraItens = (List<CarrinhoCompraItem>) request.getAttribute("carrinhoCompraItens");
-				            if (carrinhoCompraItens == null || carrinhoCompraItens.size() == 0) {
-				        %>
-				        <div>Não existem produtos no seu carrinho compras</div>
-				        <%
-					        } else {
-					            double total = 0;
-					            for (int i = 0; i < carrinhoCompraItens.size(); i++) {
-					                CarrinhoCompraItem carrinhoCompraItem = carrinhoCompraItens.get(i);
-				        %>
-				        
-				        <tr>
+						<tr>
 							<td class="cart_product">
 								<a href=""><img src="images/cart/one.png" alt=""></a>
 							</td>
 							<td class="cart_description">
-								<h4><a href=""><%= carrinhoCompraItem.getProduto().getDescricao()%></a></h4>
-								<p>ID: <%= carrinhoCompraItem.getProduto().getId()%></p>
+								<h4><a href="">Produto 1</a></h4>
+								<p>ID: 1089772</p>
 							</td>
 							<td class="cart_price">
-								<p>R$ <%= carrinhoCompraItem.getProduto().getPreco()%></p>
+								<p>R$ 59,00</p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="<%= carrinhoCompraItem.getQuantidade()%>" autocomplete="off" size="2">
+									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
 									<a class="cart_quantity_down" href=""> - </a>
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">R$ <%= carrinhoCompraItem.getProduto().getPreco() * carrinhoCompraItem.getQuantidade()%></p>
+								<p class="cart_total_price">R$ 59,00</p>
 							</td>
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href="RemoverProdutoCarrinhoCompra?produtoId=<%= carrinhoCompraItem.getProduto().getId()%>"><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
-							 <% total += carrinhoCompraItem.getProduto().getPreco() * carrinhoCompraItem.getQuantidade(); %>
 						</tr>
-				        				    
-				        <%
 
-				            }
-				        %>
-				        <tr>
-					        <td></td>
-					      	<td></td>
-					        <td></td>
-				        	<td>
-					        	<p class="cart_total_price">Total </p>
-					        </td>
-					        <td>
-					        	<p class="cart_total_price"> R$ <%= total%></p>
-					        </td>
-				        </tr>
-				        <%
-				            }
-				        %>
-					
-						
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="images/cart/two.png" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">Produto 2</a></h4>
+								<p>ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>R$ 59,00</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" href=""> + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" href=""> - </a>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">R$ 59,00</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="images/cart/three.png" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">Produto 3</a></h4>
+								<p>ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>R$ 59,00</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" href=""> + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" href=""> - </a>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">R$ 59,00</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

@@ -12,8 +12,13 @@ import java.sql.ResultSet;
  *Classe que implementa o padrão DAO para a entidade usuário
  */
 public class UsuarioDAO {
-
-    /**
+	
+	String driver = "org.postgresql.Driver";
+	String url = "jdbc:postgresql://localhost:5432/db_ecommerce";
+	String user = "postgres";
+	String password = "1234";
+    
+	/**
      * Método utilizado para obter um usuário pelo seu identificador
      *
      * @param id
@@ -22,8 +27,8 @@ public class UsuarioDAO {
      */
     public Usuario obter(int id) throws Exception {
         Usuario usuario = null;
-        Class.forName("org.postgresql.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db_ecommerce", "postgres", "1234");
+        Class.forName(driver);
+        Connection connection = DriverManager.getConnection(url, user, password);
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, nome, endereco, email, login, senha, administrador FROM usuario WHERE id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -55,8 +60,8 @@ public class UsuarioDAO {
      */
     public Usuario obter(String login) throws Exception {
         Usuario usuario = null;
-        Class.forName("org.postgresql.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db_ecommerce", "postgres", "1234");
+        Class.forName(driver);
+        Connection connection = DriverManager.getConnection(url, user, password);
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, nome, endereco, email, login, senha, administrador FROM usuario WHERE login = ?");
         preparedStatement.setString(1, login);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -91,8 +96,8 @@ public class UsuarioDAO {
      * @throws Exception
      */
     public void inserir(String nome, String endereco, String email, String login, String senha, boolean administrador) throws Exception {
-        Class.forName("org.postgresql.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/db_ecommerce", "postgres", "1234");
+        Class.forName(driver);
+        Connection connection = DriverManager.getConnection(url, user, password);
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO usuario (nome, endereco, email, login, senha, administrador) VALUES (?, ?, ?, ?, ?, ?)");
         preparedStatement.setString(1, nome);
         preparedStatement.setString(2, endereco);

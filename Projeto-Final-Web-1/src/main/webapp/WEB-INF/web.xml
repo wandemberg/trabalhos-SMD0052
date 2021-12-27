@@ -12,6 +12,22 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>ecommerce.controle.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InicioServlet</servlet-name>
+        <servlet-class>ecommerce.controle.InicioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdicionarProdutoCarrinhoCompraServlet</servlet-name>
+        <servlet-class>ecommerce.controle.AdicionarProdutoCarrinhoCompraServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
+        <servlet-class>ecommerce.controle.RemoverProdutoCarrinhoCompraServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CarrinhoCompraServlet</servlet-name>
+        <servlet-class>ecommerce.controle.CarrinhoCompraServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NovoClienteServlet</servlet-name>
         <url-pattern>/NovoCliente</url-pattern>
@@ -24,9 +40,28 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>InicioServlet</servlet-name>
+        <url-pattern>/Inicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdicionarProdutoCarrinhoCompraServlet</servlet-name>
+        <url-pattern>/AdicionarProdutoCarrinhoCompra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
+        <url-pattern>/RemoverProdutoCarrinhoCompra</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>CarrinhoCompraServlet</servlet-name>
+        <url-pattern>/carrinhoCompra</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>Inicio</welcome-file>
+    </welcome-file-list>
 </web-app>

@@ -7,6 +7,9 @@
     } else {*/
 %>
 <%@page import="ecommerce.modelo.Usuario"%>
+<%@page import="ecommerce.modelo.CarrinhoCompraItem"%>
+<%@page import="java.util.List"%>
+<%@page import="ecommerce.modelo.Produto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -73,7 +76,7 @@
 									<li><a href="cadastrar-usuario.jsp"> Crie a sua conta</a></li>																
 									<li><a href="login.jsp"> Entre</a></li>
 								<%} %>
-								<li><a href="carinho-compras.jsp"> Carrinho</a></li>
+								<li><a href="carrinhoCompra"> Carrinho</a></li>
 								<%if (usuario != null) { %>							
 									<li><a href="Logout"> Sair</a></li>
 								<%} %>
@@ -175,25 +178,40 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Produtos</h2>
+						
+						   <%
+            				List<Produto> produtosDisponiveis = (List<Produto>) request.getAttribute("produtosDisponiveis");
+            				if (produtosDisponiveis == null || produtosDisponiveis.size() == 0) {
+       						 %>
+       							 <div>Não existem produtos disponíveis</div>
+        					<%
+        					} else {
+					            for (int i = 0; i < produtosDisponiveis.size(); i++) {
+					                Produto p = produtosDisponiveis.get(i);
+					        %>
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
 										<img src="images/shop/product12.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
+										<h2>R$ <%= p.getPreco() %></h2>
+										<p><%= p.getDescricao()%></p>
+										<a href="AdicionarProdutoCarrinhoCompra?produtoId=<%= p.getId()%>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
 									</div>
 									<div class="product-overlay">
 										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
+											<h2>R$ <%= p.getPreco() %></h2>
+											<p><%= p.getDescricao()%></p>
+											<a href="AdicionarProdutoCarrinhoCompra?produtoId=<%= p.getId()%>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<% 
+					            }
+        					}
+						%>
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
