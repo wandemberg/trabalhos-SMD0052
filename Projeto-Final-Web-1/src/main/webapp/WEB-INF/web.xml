@@ -28,6 +28,14 @@
         <servlet-name>CarrinhoCompraServlet</servlet-name>
         <servlet-class>ecommerce.controle.CarrinhoCompraServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProdutoServlet</servlet-name>
+        <servlet-class>ecommerce.controle.ProdutoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarProdutoServlet</servlet-name>
+        <servlet-class>ecommerce.controle.CadastrarProdutoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NovoClienteServlet</servlet-name>
         <url-pattern>/NovoCliente</url-pattern>
@@ -52,9 +60,17 @@
         <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
         <url-pattern>/RemoverProdutoCarrinhoCompra</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CarrinhoCompraServlet</servlet-name>
         <url-pattern>/carrinhoCompra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProdutoServlet</servlet-name>
+        <url-pattern>/produto</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>CadastrarProdutoServlet</servlet-name>
+        <url-pattern>/cadastrarProduto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

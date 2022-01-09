@@ -77,7 +77,12 @@
 									<li><a href="login.jsp"> Entre</a></li>
 								<%} %>
 								<li><a href="carrinhoCompra"> Carrinho</a></li>
-								<%if (usuario != null) { %>							
+								<%if (usuario != null) { %>	
+									<%if (usuario.isAdministrador()) { %>
+										<li><a href="produtos.jsp">Produtos</a></li>
+										<li><a href="Categorias"> Categorias</a></li>									
+									<% } %>	
+									<li><a href="DadosPessoais"> Dados Pessoais</a></li>														
 									<li><a href="Logout"> Sair</a></li>
 								<%} %>
 							</ul>

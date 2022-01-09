@@ -36,6 +36,12 @@ button:hover {
   background-color: #f44336;
 }
 
+.otherbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #729fcf;
+}
+
 .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;

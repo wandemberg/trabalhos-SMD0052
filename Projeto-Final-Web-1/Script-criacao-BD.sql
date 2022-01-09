@@ -31,7 +31,9 @@ CREATE TABLE PRODUTO
  quantidade Integer NOT NULL,  
  foto VARCHAR(200),  
  preco FLOAT NOT NULL,  
- descricao VARCHAR(100) NOT NULL  
+ nome VARCHAR(100) NOT NULL,  
+ descricao VARCHAR(100) NOT NULL,
+ ativo boolean default true
 ); 
 
 CREATE TABLE VENDA_PRODUTO 
@@ -58,13 +60,17 @@ ALTER TABLE PRODUTO_CATEGORIA ADD FOREIGN KEY(id_categoria) REFERENCES CATEGORIA
 insert into USUARIO values (1, true, 'Rua X, 111', 'wandemberg gomes', 
 'wandemberg.rodrigues@gmail.com', 'wandemberg', 'qwer1234');
 
- insert into produto(id, quantidade, preco, descricao) 
- values (1, 5, 1000, 'play 1');
- insert into produto(id, quantidade, preco, descricao) 
- values (2, 10, 2000, 'play 2');
- insert into produto(id, quantidade, preco, descricao) 
- values (3, 34, 3000, 'play 3');
- insert into produto(id, quantidade, preco, descricao) 
- values (4, 51, 4000, 'play 4');
- insert into produto(id, quantidade, preco, descricao) 
- values (5, 87, 5000, 'play 5');
+ insert into produto(id, quantidade, preco, nome, descricao, ativo) 
+ values (1, 5, 1000, 'play 1', 'des 1', true);
+ insert into produto(id, quantidade, preco, nome, descricao, ativo) 
+ values (2, 10, 2000, 'play 2', 'des 2', true);
+ insert into produto(id, quantidade, preco, nome, descricao, ativo) 
+ values (3, 34, 3000, 'play 3', 'des 3', true);
+ insert into produto(id, quantidade, preco, nome, descricao, ativo) 
+ values (4, 51, 4000, 'play 4', 'des 4', true);
+ insert into produto(id, quantidade, preco, nome, descricao, ativo) 
+ values (5, 87, 5000, 'play 5', 'des 5', true);
+ 
+ 
+ drop table produto;
+ 

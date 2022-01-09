@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class Produto implements Serializable {
     
     private Integer id;
+    private String nome;
+    private Boolean ativo;
     private String descricao;
     private Integer quantidade;
     private Double preco;
@@ -53,5 +55,21 @@ public class Produto implements Serializable {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
     
 }
