@@ -71,7 +71,15 @@
     <servlet>
         <servlet-name>CategoriaServlet</servlet-name>
         <servlet-class>ecommerce.controle.CategoriaServlet</servlet-class>
-    </servlet>        
+    </servlet>       
+    <servlet>
+        <servlet-name>AtualizarUsuarioServlet</servlet-name>
+        <servlet-class>ecommerce.controle.AtualizarUsuarioServlet</servlet-class>
+    </servlet>  
+    <servlet>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <servlet-class>ecommerce.controle.UsuarioServlet</servlet-class>
+    </servlet>            
     <servlet-mapping>
         <servlet-name>NovoClienteServlet</servlet-name>
         <url-pattern>/NovoCliente</url-pattern>
@@ -143,7 +151,15 @@
     <servlet-mapping>
         <servlet-name>CategoriaServlet</servlet-name>
         <url-pattern>/categoria</url-pattern>
-    </servlet-mapping>                      
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarUsuarioServlet</servlet-name>
+        <url-pattern>/atualizarUsuario</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/dadosUsuario</url-pattern>
+    </servlet-mapping>                            
     <session-config>
         <session-timeout>
             30

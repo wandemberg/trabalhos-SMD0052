@@ -70,7 +70,7 @@
 			request.setAttribute("codigo", c.getId());
 		%>
 	    <button type="submit" >Atualizar</button>
-	    <button onclick="window.location.replace('compras.jsp');" type="button" class="cancelbtn">Cancelar</button>
+	    <button onclick="window.location.replace('Inicio');" type="button" class="cancelbtn">Cancelar</button>
 	</div>
   </div>
   

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import ecommerce.modelo.CarrinhoCompra;
 import ecommerce.modelo.CarrinhoCompraItem;
+import ecommerce.modelo.Categoria;
+import ecommerce.modelo.CategoriaDAO;
 import ecommerce.modelo.Produto;
 import ecommerce.modelo.ProdutoDAO;
 
@@ -31,12 +33,25 @@ public class InicioServlet extends HttpServlet {
             throws ServletException, IOException {
         ProdutoDAO produtoDAO = new ProdutoDAO();
         List<Produto> produtosDisponiveis = null;
+        
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        List<Categoria> categoriasDisponiveis = null;
+
         try {
             produtosDisponiveis = produtoDAO.obterProdutosEmEstoque();
         } catch (Exception ex) {
             produtosDisponiveis = new ArrayList<>();
         }
         request.setAttribute("produtosDisponiveis", produtosDisponiveis);
+        
+
+        try {
+            categoriasDisponiveis = categoriaDAO.obterCategoriasEmEstoque();
+        } catch (Exception ex) {
+            categoriasDisponiveis = new ArrayList<>();
+        }
+        request.setAttribute("categoriasDisponiveis", categoriasDisponiveis);
+        
         
         Cookie[] cookies = request.getCookies();
         Cookie cookie = null;

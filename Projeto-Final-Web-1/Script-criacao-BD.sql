@@ -9,6 +9,7 @@ CREATE TABLE USUARIO
  email VARCHAR(50) NOT NULL,  
  login VARCHAR(50) NOT NULL,  
  senha VARCHAR(20) NOT NULL,
+ ativo boolean default true,
  CONSTRAINT usuario_login_ukey UNIQUE (login)
 ); 
 
@@ -16,7 +17,8 @@ CREATE TABLE VENDA
 ( 
  id Integer PRIMARY KEY,  
  data_hora TIMESTAMP NOT NULL,  
- id_usuario INT NOT NULL  
+ id_usuario INT NOT NULL,
+ ativo boolean default true
 ); 
 
 CREATE TABLE CATEGORIA 

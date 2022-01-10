@@ -62,7 +62,7 @@ public class UsuarioDAO {
         Usuario usuario = null;
         Class.forName(driver);
         Connection connection = DriverManager.getConnection(url, user, password);
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, nome, endereco, email, login, senha, administrador FROM usuario WHERE login = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, nome, endereco, email, login, senha, administrador, ativo FROM usuario WHERE login = ?");
         preparedStatement.setString(1, login);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -74,6 +74,8 @@ public class UsuarioDAO {
             usuario.setLogin(resultSet.getString("login"));
             usuario.setSenha(resultSet.getString("senha"));
             usuario.setAdministrador(resultSet.getBoolean("administrador"));
+            usuario.setAtivo(resultSet.getBoolean("ativo"));
+
         }
         resultSet.close();
         preparedStatement.close();
@@ -111,5 +113,55 @@ public class UsuarioDAO {
         if (resultado != 1) {
             throw new Exception("Não foi possível inserir o usuário");
         }
+    }
+    
+    /**
+     * Método utilizado para atualizar um usuário
+     *
+     */
+    public void atualizar( int codigo, Boolean administrador, String endereco, 
+    		String nome, String email, String login, String senha, Boolean ativo) throws Exception {
+        Class.forName(driver);
+        Connection connection = DriverManager.getConnection(url, user, password);
+        String sql = "UPDATE usuario SET administrador = ? , endereco = ? ,"
+        		+ " nome = ? , email = ? , login = ? , senha = ? , ativo = ? WHERE id = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setBoolean(1, administrador);
+        preparedStatement.setString(2, endereco);
+        preparedStatement.setString(3, nome);
+        preparedStatement.setString(4, email);
+        preparedStatement.setString(5, login);
+        preparedStatement.setString(6, senha);
+        preparedStatement.setBoolean(7, ativo);
+        preparedStatement.setInt(8, codigo);
+
+        int resultado = preparedStatement.executeUpdate();
+        preparedStatement.close();
+        connection.close();
+        if (resultado != 1) {
+            throw new Exception("Não foi possível atualizar o usuario");
+        }              
+    }
+    
+    /**
+     * Método utilizado para desativar um usuário
+     *
+     */
+    public void desativar(int codigo) throws Exception {
+        Class.forName(driver);
+        Connection connection = DriverManager.getConnection(url, user, password);
+        String sql = "UPDATE usuario SET ativo = ? WHERE id = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setBoolean(1, false);
+        preparedStatement.setInt(2, codigo);
+
+        int resultado = preparedStatement.executeUpdate();
+        preparedStatement.close();
+        connection.close();
+        
+        if (resultado != 1) {
+            throw new Exception("Não foi possível remover o usuario");
+        }
+              
     }
 }

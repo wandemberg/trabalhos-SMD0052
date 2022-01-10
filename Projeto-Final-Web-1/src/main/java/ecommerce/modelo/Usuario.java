@@ -18,6 +18,7 @@ public class Usuario implements Serializable{
 	private String login;
 	private String senha;
 	private boolean administrador;
+	private boolean ativo;
 	
 	public int getId() {
 		return id;
@@ -60,6 +61,12 @@ public class Usuario implements Serializable{
 	}
 	public void setAdministrador(boolean adminstrador) {
 		this.administrador = adminstrador;
+	}
+	public boolean isAtivo() {
+		return ativo;
+	}
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 	

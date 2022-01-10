@@ -1,5 +1,7 @@
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
+	request.setAttribute("usuario", usuario);
+
    /* if (usuario == null) {
         request.setAttribute("mensagem", "Você não tem uma sessão válida de usuário do tipo cliente");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
@@ -10,6 +12,8 @@
 <%@page import="ecommerce.modelo.CarrinhoCompraItem"%>
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.modelo.Produto"%>
+<%@page import="ecommerce.modelo.Categoria"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -82,7 +86,8 @@
 										<li><a href="produtos.jsp">Produtos</a></li>
 										<li><a href="categorias.jsp"> Categorias</a></li>									
 									<% } %>	
-									<li><a href="DadosPessoais"> Dados Pessoais</a></li>														
+									<li>																	
+									<a href="dadosUsuario?login=<%= usuario.getLogin()%>"> Dados Pessoais</a></li>														
 									<li><a href="Logout"> Sair</a></li>
 								<%} %>
 							</ul>
@@ -111,14 +116,24 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="left-sidebar">
-						<h2>Categoria</h2>
+						<h2>Categorias</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+						 <%
+            				List<Categoria> categoriasDisponiveis = (List<Categoria>) request.getAttribute("categoriasDisponiveis");
+            				if (categoriasDisponiveis == null || categoriasDisponiveis.size() == 0) {
+       						 %>
+       							 <div>Não existem categorias disponíveis</div>
+        					<%
+        					} else {
+					            for (int i = 0; i < categoriasDisponiveis.size(); i++) {
+					                Categoria c = categoriasDisponiveis.get(i);
+					        %>
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Esporte
+											<%= c.getDescricao() %>
 										</a>
 									</h4>
 								</div>
@@ -133,47 +148,12 @@
 									</div>
 								</div>
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Brinquedo
-										</a>
-									</h4>
-								</div>
-								<div id="mens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">Barbie</a></li>
-											<li><a href="">Carros</a></li>
-											<li><a href="">Bolas</a></li>									
-										</ul>
-									</div>
-								</div>
-							</div>
+					
+						<% 
+					            }
+        					}
+						%>
 							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Casa
-										</a>
-									</h4>
-								</div>
-								<div id="womens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">Ventilador</a></li>
-											<li><a href="">Forno</a></li>
-											<li><a href="">Fogão</a></li>
-											<li><a href="">Mesa</a></li>
-											<li><a href="">Geladeira</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
 						
 						</div><!--/category-productsr-->						
 						

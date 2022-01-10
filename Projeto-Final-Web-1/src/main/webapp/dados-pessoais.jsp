@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@page import="ecommerce.modelo.Categoria"%>
+<%@page import="ecommerce.modelo.Usuario"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,39 +33,54 @@
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="Inicio">Home</a></li>
-				  <li class="active">Categorias</li>
+				  <li class="active">Dados Pessoais</li>
 				</ol>
 			</div>
-<h2>Categorias - Loja Virtual</h2>
+<h2>Dados Pessoais - Loja Virtual</h2>
 
-<form action="cadastrarCategoria" method="post">
-  
-  	
-    
+<form action="atualizarUsuario" method="post" >
+      
   <div class="container">
   	<% if (request.getAttribute("mensagem") != null) { %>
     	<hr/>
         <div class="nav navbar-nav"><%= request.getAttribute("mensagem") %></div>
-            	<hr/>
-        
+            	<hr/>        
      <% } %>
-
-    <label for="codigo"><b>Código</b></label><br>    
-    <input type="text" pattern="([0-9])+" title="Somente números" placeholder="Digite o código da categoria" name="codigo" required>
-    	
-	<br>
-   	<label for="descricao"><b>Descrição</b></label>
-    <input type="text" placeholder="Digite o descrição do produto" name="descricao" required>
-
-        <br>
-        <br>
+     
+     <%
+		    Usuario u = (Usuario) request.getAttribute("usuario");
+	%>
     
+    
+    <label for="uname"><b>Nome</b></label>
+    <input type="text"  value="<%= u.getNome() %>" placeholder="Digite o nome completo do usuário" name="nome" required>
+
+    <label for="uname"><b>Endereço</b></label>
+    <input type="text" value="<%= u.getEndereco() %>" placeholder="Digite o endereço do usuário" name="endereco" required>
+
+	<label for="uname"><b>Email</b></label>
+    <input type="text" value="<%= u.getEmail() %>" placeholder="Digite o email do usuário" name="email" required>
+
+    <label for="uname"><b>Usuário</b></label>
+    <input type="text" value="<%= u.getLogin() %>" placeholder="Digite o usuário" name="login" required>
+
+    <label for="psw"><b>Senha</b></label>
+    <input type="password" value="<%= u.getSenha() %>" placeholder="Digite a senha" onblur="checkPass(); " name="senha" id="psw" required>
+
     <div id="error-nwl"></div>
 
-
-
 	<div>   
-	    <button type="submit" >Cadastrar</button>
+		<% 
+			request.setAttribute("codigo", u.getId());
+			request.setAttribute("administrador", u.isAdministrador());
+
+		%>
+		
+		<input type="hidden" name="codigo" value="<%= u.getId()%>" />	  
+		<input type="hidden" name="administrador" value="<%= u.isAdministrador()%>" />	  
+		
+	    <button type="submit" name="atualizar" value="ok" >Atualizar</button>
+	    <button type="submit" name="apagar" value="ok" >Apagar Conta</button>	    
 	    <button onclick="window.location.replace('Inicio');" type="button" class="cancelbtn">Cancelar</button>
 	</div>
   </div>

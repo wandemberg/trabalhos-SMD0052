@@ -79,7 +79,7 @@
 
 	<div>   
 	    <button type="submit" >Cadastrar</button>
-	    <button onclick="window.location.replace('compras.jsp');" type="button" class="cancelbtn">Cancelar</button>
+	    <button onclick="window.location.replace('Inicio');" type="button" class="cancelbtn">Cancelar</button>
 	</div>
   </div>
   

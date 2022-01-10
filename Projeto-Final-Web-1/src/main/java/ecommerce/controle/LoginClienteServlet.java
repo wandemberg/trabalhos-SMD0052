@@ -31,7 +31,7 @@ public class LoginClienteServlet extends HttpServlet {
         String mensagem = null;
         try {
             Usuario usuario = usuarioDAO.obter(login);
-            if (usuario.getSenha().equals(senha)) {
+            if ( usuario.isAtivo() && usuario.getSenha().equals(senha)) {
                 sucesso = true;
                 HttpSession session = request.getSession(true);
                 session.setAttribute("usuario", usuario);
@@ -45,7 +45,7 @@ public class LoginClienteServlet extends HttpServlet {
         }
         /* saída */
         if (sucesso) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("compras.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("Inicio");
             requestDispatcher.forward(request, response);
         } else {
             request.setAttribute("mensagem", mensagem);

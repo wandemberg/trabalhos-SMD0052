@@ -60,7 +60,7 @@
 	<div> 
 	    <button type="submit" >Pesquisar</button>
 	    <button onclick="window.location.replace('categorias-cadastrar.jsp');" type="button" class="otherbtn">Novo</button>	    
-	    <button onclick="window.location.replace('compras.jsp');" type="button" class="cancelbtn">Cancelar</button>	    
+	    <button onclick="window.location.replace('Inicio');" type="button" class="cancelbtn">Cancelar</button>	    
 	</div>
   </div>
 </form>  
