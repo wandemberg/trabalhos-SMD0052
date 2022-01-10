@@ -38,7 +38,6 @@
 			</div>
 <h2>Produtos - Loja Virtual</h2>
 
-<form action="produto" method="post">
   
 	<% if (request.getAttribute("mensagem") != null) { %>
     <hr/>
@@ -57,10 +56,13 @@
 	
     <div id="error-nwl"></div>
 
-	<div>   
+	<div> 
+	<form action="produto" method="post">	  
 	    <button type="submit" >Pesquisar</button>
 	    <button onclick="window.location.replace('produtos-cadastrar.jsp');" type="button" class="otherbtn">Novo</button>	    
 	    <button onclick="window.location.replace('compras.jsp');" type="button" class="cancelbtn">Cancelar</button>
+	</form>
+	    
 	</div>
   </div>
   
@@ -78,6 +80,7 @@
 							<td class="quantity">Quantidade</td>
 							<td class="total">Custo unitário</td>
 							<td></td>
+							<td></td>							
 						</tr>
 					</thead>
 					<tbody>
@@ -99,16 +102,16 @@
 							<td class="cart_price">
 								<p><%= produtoEncontrado.getId()%></p>
 							</td>
-							<td class="cart_price">
-								<%= (produtoEncontrado.getFoto() == null) ? "Sem Foto" : "<img src=\"ExibirProdutoFoto?id=" + produtoEncontrado.getId() + "\" />" %>
+							<td>
+								<%= (produtoEncontrado.getFoto() == null) ? "Sem Foto" : "<img  style=\" height: 100px; width: 100px; \" src=\"ExibirProdutoFoto?id=" + produtoEncontrado.getId() + "\" />" %>
+								
 							</td>
 							<td class="cart_description">
-								<h4><a href=""><%= produtoEncontrado.getDescricao()%></a></h4>
+								<h4><a href=""><%= produtoEncontrado.getNome()%></a></h4>
 								<p>ID: <%= produtoEncontrado.getId()%></p>
 							</td>
 							<td class="cart_description">
 								<h4><a href=""><%= produtoEncontrado.getDescricao()%></a></h4>
-								<p>ID: <%= produtoEncontrado.getId()%></p>
 							</td>
 							<td class="cart_price">
 								<p><%= produtoEncontrado.getQuantidade()%></p>
@@ -116,9 +119,17 @@
 							<td class="cart_price">
 								<p>R$ <%= produtoEncontrado.getPreco()%></p>
 							</td>
-							<td>
-								<button class="btn" title="Editar"><i class="fa fa-pencil"></i></button>
-								<button class="btn" title="Excluir"><i class="fa fa-trash"></i></button>
+							<td>	
+								<form action="buscarProduto" method="post">
+								<input type="hidden" name="codigo" value="<%= produtoEncontrado.getId()%>" />	  
+									<button type="submit" class="btn" name="Editar" title="Editar"><i class="fa fa-pencil"></i></button>
+								</form>
+								</td>
+							<td>	
+								<form action="removerProduto" method="post">
+									<input type="hidden" name="codigo" value="<%= produtoEncontrado.getId()%>" />																
+									<button class="btn" title="Excluir"><i class="fa fa-trash"></i></button>
+								</form>
 							</td>
 						</tr>
 				        				    
@@ -138,6 +149,5 @@
 		</div>
 	</section>
 
-</form>
 </body>
 </html>

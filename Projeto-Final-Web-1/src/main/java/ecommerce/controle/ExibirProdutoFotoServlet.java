@@ -42,7 +42,7 @@ public class ExibirProdutoFotoServlet extends HttpServlet {
                     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     return;
                 }
-                response.setContentLengthLong(arquivoFoto.length());
+                response.setContentLength((int) arquivoFoto.length());
                 response.setContentType(mimeType);
                 FileInputStream in = new FileInputStream(arquivoFoto);
                 OutputStream out = response.getOutputStream();

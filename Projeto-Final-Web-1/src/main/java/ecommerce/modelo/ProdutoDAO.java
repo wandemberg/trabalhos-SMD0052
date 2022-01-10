@@ -30,7 +30,7 @@ public class ProdutoDAO {
         Produto produto = null;
         Class.forName(driver);
         Connection connection = DriverManager.getConnection(url, user, password);
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto FROM produto WHERE id = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto, nome, ativo FROM produto WHERE id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -40,6 +40,9 @@ public class ProdutoDAO {
             produto.setQuantidade(resultSet.getInt("quantidade"));
             produto.setPreco(resultSet.getDouble("preco"));
             produto.setFoto(resultSet.getString("foto"));
+            produto.setNome(resultSet.getString("nome"));
+            produto.setAtivo(resultSet.getBoolean("ativo"));
+
             if (resultSet.wasNull()) {
                 produto.setFoto(null);
             }
@@ -72,6 +75,9 @@ public class ProdutoDAO {
             produto.setQuantidade(resultSet.getInt("quantidade"));
             produto.setPreco(resultSet.getDouble("preco"));
             produto.setFoto(resultSet.getString("foto"));
+            produto.setNome(resultSet.getString("nome"));
+            produto.setAtivo(resultSet.getBoolean("ativo"));
+            
             if (resultSet.wasNull()) {
                 produto.setFoto(null);
             }
@@ -96,17 +102,17 @@ public class ProdutoDAO {
         PreparedStatement preparedStatement = null;
         
         if ((nome==null || nome.equals(""))&&(codigo==null || codigo.equals(""))) {
-	        preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto FROM produto ");
+	        preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto, nome, ativo FROM produto WHERE  ativo = TRUE ");
         } else if ((nome==null || nome.equals(""))&&!(codigo==null || codigo.equals(""))) {
-	        preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto FROM produto WHERE id = ? ");
+	        preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto, nome, ativo FROM produto WHERE id = ?  AND ativo = TRUE ");
 	        preparedStatement.setInt(1, Integer.parseInt(codigo));
         } else if (!(nome==null || nome.equals(""))&&(codigo==null || codigo.equals(""))) {
-	        preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto FROM produto "
-	        		+ " WHERE descricao ILIKE ? ");
+	        preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto, nome, ativo FROM produto "
+	        		+ " WHERE descricao ILIKE ? AND ativo = TRUE ");
 	        preparedStatement.setString(1, nome);
         } else {
-	        preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto FROM produto WHERE id = ? "
-	        		+ " AND descricao ILIKE ? ");
+	        preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto, nome, ativo FROM produto WHERE id = ? "
+	        		+ " AND descricao ILIKE ?  AND ativo = TRUE ");
 	        preparedStatement.setInt(1, Integer.parseInt(codigo));
 	        preparedStatement.setString(2, nome);
         }
@@ -119,6 +125,9 @@ public class ProdutoDAO {
             produto.setQuantidade(resultSet.getInt("quantidade"));
             produto.setPreco(resultSet.getDouble("preco"));
             produto.setFoto(resultSet.getString("foto"));
+            produto.setNome(resultSet.getString("nome"));
+            produto.setAtivo(resultSet.getBoolean("ativo"));
+            
             if (resultSet.wasNull()) {
                 produto.setFoto(null);
             }

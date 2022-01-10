@@ -15,6 +15,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import ecommerce.modelo.Produto;
 import ecommerce.modelo.ProdutoDAO;
 
 /**
@@ -23,7 +24,7 @@ import ecommerce.modelo.ProdutoDAO;
  * Servlet que implementa a camada de controle da ação de produtos
  * 
  */
-public class CadastrarProdutoServlet extends HttpServlet {
+public class AtualizarProdutoServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -90,13 +91,13 @@ public class CadastrarProdutoServlet extends HttpServlet {
                     foto.write(new File("/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf("."))));
                     //ProdutoDAO produtoDAO = new ProdutoDAO();
                     //produtoDAO.atualizarFoto(id, "/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf(".")));
-               	 	produtoDAO.inserir(nome,codigo, "/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf(".")), preco, descricao, quantidade);
-               	 	mensagem = "Cadastro realizado com sucesso!";
+               	 	produtoDAO.atualizar(nome,codigo, "/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf(".")), preco, descricao, quantidade);
+               	 	mensagem = "Atualização realizada com sucesso!";
                     sucesso = true;
                 }
                 
                 if (sucesso) {
-               	 	mensagem = "Cadastro realizado com sucesso!";
+               	 	mensagem = "Atualização realizada com sucesso!";
                 } else {
                     inseriu = false;
                     mensagem = "Não foi possível processar o upload da foto deste produto";
@@ -121,7 +122,16 @@ public class CadastrarProdutoServlet extends HttpServlet {
 	        RequestDispatcher requestDispatcher = request.getRequestDispatcher("produtos.jsp");
 	        requestDispatcher.forward(request, response);
         } else {
-        	RequestDispatcher requestDispatcher = request.getRequestDispatcher("produtos-cadastrar.jsp");
+              Produto produtoAtualizar = null;
+              try {
+              	produtoAtualizar =produtoDAO.obter(codigo);
+      		} catch (Exception e) {
+      			e.printStackTrace();
+      		}
+              
+              request.setAttribute("produtoAtualizar", produtoAtualizar);
+            request.setAttribute("produtoAtualizar", produtoAtualizar);
+        	RequestDispatcher requestDispatcher = request.getRequestDispatcher("produtos-atualizar.jsp");
 	        requestDispatcher.forward(request, response);
         }
     }

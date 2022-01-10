@@ -1161,6 +1161,12 @@ h2.title {
     width: 100%;
 }
 
+.view-product-tamanho {
+    border: 1px solid #F7F7F0;
+    height: 10px;
+    width: 10px;
+}
+
 .view-product h3 {
     background: #FE980F;
     bottom: 0;

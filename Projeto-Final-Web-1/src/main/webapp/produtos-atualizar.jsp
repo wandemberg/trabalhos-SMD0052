@@ -38,37 +38,38 @@
 			</div>
 <h2>Produtos - Loja Virtual</h2>
 
-<form action="cadastrarProduto" method="post" enctype="multipart/form-data">
-  
-  	
-    
+<form action="atualizarProduto" method="post" enctype="multipart/form-data">
+      
   <div class="container">
   	<% if (request.getAttribute("mensagem") != null) { %>
     	<hr/>
         <div class="nav navbar-nav"><%= request.getAttribute("mensagem") %></div>
-            	<hr/>
-        
+            	<hr/>        
      <% } %>
+     
+     <%
+		    Produto p = (Produto) request.getAttribute("produtoAtualizar");
+	%>
     <label for="nome"><b>Nome</b></label>
-    <input type="text" placeholder="Digite o nome do produto" name="nome" required>
+    <input type="text" value="<%= p.getNome() %>"placeholder="Digite o nome do produto" name="nome" required>
 
     <label for="codigo"><b>Código</b></label><br>    
-    <input type="text" pattern="([0-9])+" title="Somente números" placeholder="Digite o código do produto" name="codigo" required>
+    <input type="text" value="<%= p.getId() %>"pattern="([0-9])+" title="Somente números" placeholder="Digite o código do produto" name="codigo" required>
     
     <br>
     <label for="foto"><b>Foto</b></label>
-   	<input type="file" name="foto" placeholder="Selecione uma nova foto para o produto"/>
+   	<input type="file" value="<%= p.getFoto() %>"name="foto" placeholder="Selecione uma nova foto para o produto"/>
 
     <label for="preco"><b>Preço (R$)</b></label><br>
-    <input type="text" pattern="[0-9]+,[0-9]+$" title="Somente no padrão R$ X,X" 
+    <input type="text" value="<%= p.getPreco() %>" pattern="[0-9]+,[0-9]+$" title="Somente no padrão R$ X,X" 
     placeholder="Digite o preço do produto" name="preco" required>
 	
 	<br>
    	<label for="descricao"><b>Descrição</b></label>
-    <input type="text" placeholder="Digite o descrição do produto" name="descricao" required>
+    <input type="text" value="<%= p.getDescricao() %>" placeholder="Digite o descrição do produto" name="descricao" required>
 
     <label for="quantidade"><b>Quantidade</b></label>    <br>    
-    <input type="number" min="0" step="1" title="Somente números" 
+    <input type="number" value="<%= p.getQuantidade() %>" min="0" step="1" title="Somente números" 
     		placeholder="Digite a quantidade do produto" name="quantidade" required>
         <br>
         <br>
@@ -78,7 +79,10 @@
 
 
 	<div>   
-	    <button type="submit" >Cadastrar</button>
+		<% 
+			request.setAttribute("codigo", p.getId());
+		%>
+	    <button type="submit" >Atualizar</button>
 	    <button onclick="window.location.replace('compras.jsp');" type="button" class="cancelbtn">Cancelar</button>
 	</div>
   </div>
