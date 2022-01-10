@@ -52,6 +52,26 @@
     	<servlet-name>DesativarProdutoServlet</servlet-name>
         <servlet-class>ecommerce.controle.DesativarProdutoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AtualizarCategoriaServlet</servlet-name>
+        <servlet-class>ecommerce.controle.AtualizarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+    <servlet-name>BuscarCategoriaServlet</servlet-name>
+        <servlet-class>ecommerce.controle.BuscarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<servlet-name>DesativarCategoriaServlet</servlet-name>
+        <servlet-class>ecommerce.controle.DesativarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CadastrarCategoriaServlet</servlet-name>
+        <servlet-class>ecommerce.controle.CadastrarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategoriaServlet</servlet-name>
+        <servlet-class>ecommerce.controle.CategoriaServlet</servlet-class>
+    </servlet>        
     <servlet-mapping>
         <servlet-name>NovoClienteServlet</servlet-name>
         <url-pattern>/NovoCliente</url-pattern>
@@ -103,7 +123,27 @@
     <servlet-mapping>
         <servlet-name>DesativarProdutoServlet</servlet-name>
         <url-pattern>/removerProduto</url-pattern>
-    </servlet-mapping>        
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtualizarCategoriaServlet</servlet-name>
+        <url-pattern>/atualizarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscarCategoriaServlet</servlet-name>
+        <url-pattern>/buscarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DesativarCategoriaServlet</servlet-name>
+        <url-pattern>/removerCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CadastrarCategoriaServlet</servlet-name>
+        <url-pattern>/cadastrarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoriaServlet</servlet-name>
+        <url-pattern>/categoria</url-pattern>
+    </servlet-mapping>                      
     <session-config>
         <session-timeout>
             30

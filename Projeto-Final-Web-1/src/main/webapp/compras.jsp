@@ -80,7 +80,7 @@
 								<%if (usuario != null) { %>	
 									<%if (usuario.isAdministrador()) { %>
 										<li><a href="produtos.jsp">Produtos</a></li>
-										<li><a href="Categorias"> Categorias</a></li>									
+										<li><a href="categorias.jsp"> Categorias</a></li>									
 									<% } %>	
 									<li><a href="DadosPessoais"> Dados Pessoais</a></li>														
 									<li><a href="Logout"> Sair</a></li>
@@ -198,9 +198,9 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="images/shop/product12.jpg" alt="" />
+										<%= (p.getFoto() == null) ? "Sem Foto" : "<img  style=\" height: 100px; width: 100px; \" src=\"ExibirProdutoFoto?id=" + p.getId() + "\" />" %>
 										<h2>R$ <%= p.getPreco() %></h2>
-										<p><%= p.getDescricao()%></p>
+										<p><%= p.getNome()%></p>
 										<a href="AdicionarProdutoCarrinhoCompra?produtoId=<%= p.getId()%>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
 									</div>
 									<div class="product-overlay">
@@ -217,236 +217,8 @@
 					            }
         					}
 						%>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/shop/product11.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/shop/product10.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/shop/product9.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-									<img src="images/home/new.png" class="new" alt="" />
-								</div>
-								
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/shop/product8.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-									<img src="images/home/sale.png" class="new" alt="" />
-								</div>
-								
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/shop/product7.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/home/product6.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/home/product5.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/home/product4.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/home/product3.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						
-						
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/home/product2.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-						
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="images/home/product1.jpg" alt="" />
-										<h2>R$ 25,00</h2>
-										<p>Produto</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>R$ 25,00</h2>
-											<p>Produto</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Adicionar ao carrinho</a>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-						
+					
+											
 						<ul class="pagination">
 							<li class="active"><a href="">1</a></li>
 							<li><a href="">2</a></li>

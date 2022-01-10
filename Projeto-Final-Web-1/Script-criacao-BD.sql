@@ -22,7 +22,8 @@ CREATE TABLE VENDA
 CREATE TABLE CATEGORIA 
 ( 
  descricao VARCHAR(100) NOT NULL,  
- id Integer PRIMARY KEY  
+ id Integer PRIMARY KEY,
+ ativo boolean default true
 ); 
 
 CREATE TABLE PRODUTO 
@@ -40,14 +41,16 @@ CREATE TABLE VENDA_PRODUTO
 ( 
  quantidade Integer NOT NULL,  
  id_venda Integer,  
- id_produto Integer,  
+ id_produto Integer,
+ ativo boolean default true;
  PRIMARY KEY(id_venda, id_produto)
 ); 
 
 CREATE TABLE PRODUTO_CATEGORIA 
 ( 
  id_produto Integer,  
- id_categoria Integer,  
+ id_categoria Integer,
+ ativo boolean default true,
   PRIMARY KEY(id_produto, id_categoria)
 ); 
 

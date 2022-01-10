@@ -66,7 +66,7 @@ public class ProdutoDAO {
         List<Produto> produtos = new ArrayList<>();
         Class.forName(driver);
         Connection connection = DriverManager.getConnection(url, user, password);
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto FROM produto WHERE quantidade > 0");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, nome, descricao, quantidade, preco, foto, ativo FROM produto WHERE quantidade > 0");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             Produto produto = new Produto();

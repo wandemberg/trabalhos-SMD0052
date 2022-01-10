@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@page import="ecommerce.modelo.Produto"%>
+<%@page import="ecommerce.modelo.Categoria"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,10 +33,10 @@
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="Inicio">Home</a></li>
-				  <li class="active">Produtos</li>
+				  <li class="active">Categorias</li>
 				</ol>
 			</div>
-<h2>Produtos - Loja Virtual</h2>
+<h2>Categorias - Loja Virtual</h2>
 
   
 	<% if (request.getAttribute("mensagem") != null) { %>
@@ -44,27 +44,26 @@
         <div class="nav navbar-nav"><%= request.getAttribute("mensagem") %></div>
     <hr/>
         
-     <% } %>
-       	
-<form action="produto" method="post">    
+     <% } %>  	
+<form action="categoria" method="post">	  
+    
   <div class="container">
     <label for="descricao"><b>Nome</b></label>
-    <input type="text" placeholder="Digite o nome do produto" name="descricao" >
+    <input type="text" placeholder="Digite o nome da categoria" name="descricao" >
 
     <label for="codigo"><b>Código</b></label>
-    <input type="text" pattern="([0-9])+" title="Somente números" placeholder="Digite o código do produto" name="codigo">
+    <input type="text" pattern="([0-9])+" title="Somente números" placeholder="Digite o código do categoria" name="codigo">
     
 	
     <div id="error-nwl"></div>
 
 	<div> 
 	    <button type="submit" >Pesquisar</button>
-	    <button onclick="window.location.replace('produtos-cadastrar.jsp');" type="button" class="otherbtn">Novo</button>	    
+	    <button onclick="window.location.replace('categorias-cadastrar.jsp');" type="button" class="otherbtn">Novo</button>	    
 	    <button onclick="window.location.replace('compras.jsp');" type="button" class="cancelbtn">Cancelar</button>	    
 	</div>
   </div>
-</form>
-  
+</form>  
 <section id="cart_items">
 		<div class="container">
 
@@ -73,11 +72,7 @@
 					<thead>
 						<tr class="cart_menu">
 							<td class="image">Código</td>
-							<td class="image">Imagem</td>							
 							<td class="description">Nome</td>
-							<td class="price">Descrição</td>
-							<td class="quantity">Quantidade</td>
-							<td class="total">Custo unitário</td>
 							<td></td>
 							<td></td>							
 						</tr>
@@ -85,48 +80,34 @@
 					<tbody>
 					
 						<%
-				            List<Produto> produtosEncontados = (List<Produto>) request.getAttribute("produtosEncontrados");
-				            if (produtosEncontados == null || produtosEncontados.size() == 0) {
+				            List<Categoria> categoriasEncontadas = (List<Categoria>) request.getAttribute("categoriasEncontradas");
+				            if (categoriasEncontadas == null || categoriasEncontadas.size() == 0) {
 				        %>
-				        <div>Não existem produtos com os dados informados!</div>
+				        <div>Não existem categorias com os dados informados!</div>
 				        <br>
 				        <%
 					        } else {
 					            double total = 0;
-					            for (int i = 0; i < produtosEncontados.size(); i++) {
-					            	Produto produtoEncontrado = produtosEncontados.get(i);
+					            for (int i = 0; i < categoriasEncontadas.size(); i++) {
+					            	Categoria categoriaEncontrada = categoriasEncontadas.get(i);
 				        %>
 				        
 				        <tr>
 							<td class="cart_price">
-								<p><%= produtoEncontrado.getId()%></p>
-							</td>
-							<td>
-								<%= (produtoEncontrado.getFoto() == null) ? "Sem Foto" : "<img  style=\" height: 100px; width: 100px; \" src=\"ExibirProdutoFoto?id=" + produtoEncontrado.getId() + "\" />" %>
-								
+								<p><%= categoriaEncontrada.getId()%></p>
 							</td>
 							<td class="cart_description">
-								<h4><a href=""><%= produtoEncontrado.getNome()%></a></h4>
-								<p>ID: <%= produtoEncontrado.getId()%></p>
-							</td>
-							<td class="cart_description">
-								<h4><a href=""><%= produtoEncontrado.getDescricao()%></a></h4>
-							</td>
-							<td class="cart_price">
-								<p><%= produtoEncontrado.getQuantidade()%></p>
-							</td>
-							<td class="cart_price">
-								<p>R$ <%= produtoEncontrado.getPreco()%></p>
+								<h4><a href=""><%= categoriaEncontrada.getDescricao()%></a></h4>
 							</td>
 							<td>	
-								<form action="buscarProduto" method="post">
-								<input type="hidden" name="codigo" value="<%= produtoEncontrado.getId()%>" />	  
+								<form action="buscarCategoria" method="post">
+								<input type="hidden" name="codigo" value="<%= categoriaEncontrada.getId()%>" />	  
 									<button type="submit" class="btn" name="Editar" title="Editar"><i class="fa fa-pencil"></i></button>
 								</form>
 								</td>
 							<td>	
-								<form action="removerProduto" method="post">
-									<input type="hidden" name="codigo" value="<%= produtoEncontrado.getId()%>" />																
+								<form action="removerCategoria" method="post">
+									<input type="hidden" name="codigo" value="<%= categoriaEncontrada.getId()%>" />																
 									<button class="btn" title="Excluir"><i class="fa fa-trash"></i></button>
 								</form>
 							</td>
