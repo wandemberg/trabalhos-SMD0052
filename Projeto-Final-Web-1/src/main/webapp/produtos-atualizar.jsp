@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.modelo.Produto"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,10 +60,11 @@
     
     <br>
     <label for="foto"><b>Foto</b></label>
+    <p>		<%= (p.getFoto() == null) ? "Sem Foto" : p.getFoto() %></p>    
    	<input type="file" value="<%= p.getFoto() %>"name="foto" placeholder="Selecione uma nova foto para o produto"/>
 
     <label for="preco"><b>Preço (R$)</b></label><br>
-    <input type="text" value="<%= p.getPreco() %>" pattern="[0-9]+,[0-9]+$" title="Somente no padrão R$ X,X" 
+    <input type="text" value="<%= p.getPreco() %>" pattern="[0-9]+.[0-9]+$" title="Somente no padrão R$ X.X" 
     placeholder="Digite o preço do produto" name="preco" required>
 	
 	<br>
@@ -71,6 +74,14 @@
     <label for="quantidade"><b>Quantidade</b></label>    <br>    
     <input type="number" value="<%= p.getQuantidade() %>" min="0" step="1" title="Somente números" 
     		placeholder="Digite a quantidade do produto" name="quantidade" required>
+        <br>
+    <label for="descricao"><b>Categoria</b></label>
+	<select name="category">
+	    <c:forEach items="${categoriasDisponiveis}" var="category">
+	        <option value="${category.id}" ${category.id == selectedCat ? 'selected="selected"' : ''}>${category.descricao}</option>
+	    </c:forEach>
+	</select>   
+	
         <br>
         <br>
     

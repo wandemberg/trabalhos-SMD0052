@@ -28,7 +28,7 @@ public class ExibirProdutoFotoServlet extends HttpServlet {
         Produto produto = null;
         
         try {
-            produto = produtoDAO.obter(id);
+            produto = produtoDAO.obter(id, true);
         } catch (Exception ex) {
             produto = null;
         }

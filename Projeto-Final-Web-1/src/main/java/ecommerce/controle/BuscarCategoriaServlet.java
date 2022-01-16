@@ -32,7 +32,7 @@ public class BuscarCategoriaServlet extends HttpServlet {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         Categoria categoriaAtualizar = null;
         try {
-        	categoriaAtualizar =categoriaDAO.obter(codigo);
+        	categoriaAtualizar =categoriaDAO.obter(codigo, true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

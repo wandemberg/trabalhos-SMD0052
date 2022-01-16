@@ -2,6 +2,7 @@ package ecommerce.controle;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import ecommerce.modelo.Categoria;
+import ecommerce.modelo.CategoriaDAO;
 import ecommerce.modelo.ProdutoDAO;
 
 /**
@@ -41,6 +44,7 @@ public class CadastrarProdutoServlet extends HttpServlet {
       //  String foto = request.getParameter("foto");
         double preco = 0;// = Double.parseDouble(request.getParameter("preco").replaceAll(",", "."));
         int quantidade = 0;// = Integer.parseInt(request.getParameter("quantidade"));
+        Integer idCategoria = null;
         
         ProdutoDAO produtoDAO = new ProdutoDAO();
         String mensagem = null;
@@ -85,12 +89,32 @@ public class CadastrarProdutoServlet extends HttpServlet {
                     if (item.isFormField() && item.getFieldName().equals("quantidade")) {
                     	quantidade = Integer.parseInt(item.getString());
                     }
+                    
+                    if (item.isFormField() && item.getFieldName().equals("category")) {
+                    	idCategoria = Integer.parseInt(item.getString());
+                    }
                 }
                 if (id != -1 && foto != null) {
-                    foto.write(new File("/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf("."))));
+                	if (!foto.getName().equals("")) {
+                		foto.write(new File("/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf("."))));
+               	 		produtoDAO.inserir(nome,codigo, "/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf(".")), preco, descricao, quantidade, false);
+                	} else {
+                		produtoDAO.inserir(nome,codigo, null, preco, descricao, quantidade, false);
+                	}
                     //ProdutoDAO produtoDAO = new ProdutoDAO();
                     //produtoDAO.atualizarFoto(id, "/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf(".")));
-               	 	produtoDAO.inserir(nome,codigo, "/home/wandemberg/Upload/" + id + foto.getName().substring(foto.getName().lastIndexOf(".")), preco, descricao, quantidade);
+               	 	Integer categoriaAssociada = produtoDAO.categoriaProduto(codigo, false );
+               	 	
+               	 	if (categoriaAssociada!=null) {
+                    	//produtoDAO = new ProdutoDAO();
+               	 		produtoDAO.removerCategoriaProduto(codigo, idCategoria, false);
+               	 	}
+               	 	
+               	 	if (idCategoria != null) {
+                    	//produtoDAO = new ProdutoDAO();
+               	 		produtoDAO.inserirCategoriaProduto(codigo, idCategoria,true);
+               	 	}
+               	 	
                	 	mensagem = "Cadastro realizado com sucesso!";
                     sucesso = true;
                 }
@@ -108,7 +132,17 @@ public class CadastrarProdutoServlet extends HttpServlet {
             }
         } else {
             inseriu = false;
-            mensagem = "Não foi possível processar o upload da foto deste produto";
+           // mensagem = "Não foi possível processar o upload da foto deste produto";
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            List<Categoria> categoriasDisponiveis = null;
+
+            try {
+                categoriasDisponiveis = categoriaDAO.obterCategoriasEmEstoque();
+            } catch (Exception ex) {
+                categoriasDisponiveis = new ArrayList<>();
+            }
+            request.setAttribute("categoriasDisponiveis", categoriasDisponiveis);            
+            
         }
         
        /* RequestDispatcher requestDispatcher = request.getRequestDispatcher("MostrarProdutoFoto?id=" + id);

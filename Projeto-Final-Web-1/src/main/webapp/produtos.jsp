@@ -59,7 +59,7 @@
 
 	<div> 
 	    <button type="submit" >Pesquisar</button>
-	    <button onclick="window.location.replace('produtos-cadastrar.jsp');" type="button" class="otherbtn">Novo</button>	    
+	    <button onclick="window.location.replace('cadastrarProduto');" type="button" class="otherbtn">Novo</button>	    
 	    <button onclick="window.location.replace('Inicio');" type="button" class="cancelbtn">Cancelar</button>	    
 	</div>
   </div>
@@ -76,6 +76,7 @@
 							<td class="image">Imagem</td>							
 							<td class="description">Nome</td>
 							<td class="price">Descrição</td>
+							<td class="price">Categoria</td>							
 							<td class="quantity">Quantidade</td>
 							<td class="total">Custo unitário</td>
 							<td></td>
@@ -111,6 +112,10 @@
 							</td>
 							<td class="cart_description">
 								<h4><a href=""><%= produtoEncontrado.getDescricao()%></a></h4>
+							</td>
+							<td>
+								<%= (produtoEncontrado.getCategoria() == null) ? "Sem Categoria" : produtoEncontrado.getCategoria().getDescricao()  %>
+								
 							</td>
 							<td class="cart_price">
 								<p><%= produtoEncontrado.getQuantidade()%></p>

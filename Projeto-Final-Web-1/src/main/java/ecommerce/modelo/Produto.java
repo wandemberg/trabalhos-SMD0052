@@ -15,6 +15,7 @@ public class Produto implements Serializable {
     private Integer quantidade;
     private Double preco;
     private String foto;
+    private Categoria categoria;
 
     public Integer getId() {
         return id;
@@ -70,6 +71,14 @@ public class Produto implements Serializable {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
     
 }

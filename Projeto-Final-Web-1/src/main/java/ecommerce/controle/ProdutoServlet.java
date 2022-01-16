@@ -1,6 +1,7 @@
 package ecommerce.controle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ecommerce.modelo.CarrinhoCompra;
 import ecommerce.modelo.CarrinhoCompraItem;
+import ecommerce.modelo.Categoria;
+import ecommerce.modelo.CategoriaDAO;
 import ecommerce.modelo.Produto;
 import ecommerce.modelo.ProdutoDAO;
 
@@ -37,6 +40,21 @@ public class ProdutoServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        
+        for (Produto produto : produtosEncontrados) {
+
+            try {
+            	Integer idCategoria = produtoDAO.categoriaProduto(produto.getId(), false);
+            	Categoria categoriaEncontrada = null;
+            	if (idCategoria!=null) {
+            		 categoriaEncontrada = categoriaDAO.obter(idCategoria,false);
+            	}
+            	produto.setCategoria(categoriaEncontrada);
+            } catch (Exception ex) {
+            	produto.setCategoria(null);
+            }
+        }
         
         request.setAttribute("produtosEncontrados", produtosEncontrados);
         

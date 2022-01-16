@@ -59,7 +59,7 @@ public class CarrinhoCompra {
                 CarrinhoCompraItem carrinhoCompraItem = new CarrinhoCompraItem();
                 Produto produto = null;
                 try {
-                    produto = produtoDAO.obter(Integer.parseInt(item[0]));
+                    produto = produtoDAO.obter(Integer.parseInt(item[0]),true);
                 } catch (Exception ex) {
                     produto = null;
                 }
@@ -72,7 +72,7 @@ public class CarrinhoCompra {
             CarrinhoCompraItem carrinhoCompraItem = new CarrinhoCompraItem();
             Produto produto = null;
             try {
-                produto = produtoDAO.obter(Integer.parseInt(item[0]));
+                produto = produtoDAO.obter(Integer.parseInt(item[0]),true);
             } catch (Exception ex) {
                 produto = null;
             }
