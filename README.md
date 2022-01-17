@@ -1,7 +1,18 @@
 # trabalhos-SMD0052
 Autor: Wandemberg Gomes <br><br>
 – Link para acessar a aplicação: <br>
-http://localhost:8080/Projeto-Final-Web-1/compras.jsp
+http://localhost:8080/Projeto-Final-Web-1/
+
+
+
+<h3>Parte 3 do trabalho final.</h3>
+
+– Um vídeo que mostre e explique o estado atual do Trabalho Final. <br>
+https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/entrega-parte-3/Video-trabalho-final-parte-3-reduzido.mp4 <br>
+
+– Um documento com nomes dos integrantes da equipe. <br>
+https://github.com/wandemberg/trabalhos-SMD0052/blob/main/Projeto-Final-Web-1/entrega-parte-3/Trabalho%20Final%20-%20Parte%203.pdf <br>
+
 
 <h3>Parte 2 do trabalho final.</h3>
 
