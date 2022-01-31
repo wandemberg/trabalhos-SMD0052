@@ -21,12 +21,24 @@
         <servlet-class>ecommerce.controle.AdicionarProdutoCarrinhoCompraServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AdicionarProdutoCarrinhoServlet</servlet-name>
+        <servlet-class>ecommerce.controle.AdicionarProdutoCarrinhoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DecrementarProdutoCarrinhoServlet</servlet-name>
+        <servlet-class>ecommerce.controle.DecrementarProdutoCarrinhoServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
         <servlet-class>ecommerce.controle.RemoverProdutoCarrinhoCompraServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CarrinhoCompraServlet</servlet-name>
         <servlet-class>ecommerce.controle.CarrinhoCompraServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FinalizarCompraDoCarrinhoServlet</servlet-name>
+        <servlet-class>ecommerce.controle.FinalizarCompraDoCarrinhoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProdutoServlet</servlet-name>
@@ -100,6 +112,14 @@
         <servlet-name>AdicionarProdutoCarrinhoCompraServlet</servlet-name>
         <url-pattern>/AdicionarProdutoCarrinhoCompra</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+    <servlet-name>AdicionarProdutoCarrinhoServlet</servlet-name>
+        <url-pattern>/AdicionarProdutoCarrinho</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DecrementarProdutoCarrinhoServlet</servlet-name>
+        <url-pattern>/DecrementarProdutoCarrinho</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RemoverProdutoCarrinhoCompraServlet</servlet-name>
         <url-pattern>/RemoverProdutoCarrinhoCompra</url-pattern>
@@ -107,6 +127,10 @@
     <servlet-mapping>
         <servlet-name>CarrinhoCompraServlet</servlet-name>
         <url-pattern>/carrinhoCompra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FinalizarCompraDoCarrinhoServlet</servlet-name>
+        <url-pattern>/FinalizarCompraDoCarrinho</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProdutoServlet</servlet-name>

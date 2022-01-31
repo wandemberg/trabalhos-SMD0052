@@ -1,3 +1,12 @@
+<%
+    Usuario usuario = (Usuario) session.getAttribute("usuario");
+	request.setAttribute("usuario", usuario);
+	if (usuario != null) {
+		request.setAttribute("idUsuario", usuario.getId());
+	}
+	
+%>
+<%@page import="ecommerce.modelo.Usuario"%>
 <%@page import="ecommerce.modelo.CarrinhoCompraItem"%>
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.modelo.Produto"%>
@@ -33,6 +42,30 @@
     
 </head>
 <body>
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6 ">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<%if (usuario != null) { %>
+									<li><a href="compras.jsp"> Bem-vindo, <%= usuario.getNome()%>!</a></li>
+									<li><a href="compras.jsp"> <%= usuario.getEmail()%></a></li>
+								<%} %>
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div><!--/header_top-->
+		
+			<% if (request.getAttribute("mensagem") != null) { %>
+        <hr/>
+        <div><%= request.getAttribute("mensagem") %></div>
+        <% } %>
+ <hr/>
+<form action="FinalizarCompraDoCarrinho" method="post">
 <section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -41,6 +74,9 @@
 				  <li class="active">Carrinho de compras</li>
 				</ol>
 			</div>
+			<% if (usuario == null) { %> 
+					<p class="cart_total_price">É necessário realizar o login para finalizar a compra </p> <br>			
+			<%} %>
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -80,9 +116,9 @@
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="<%= carrinhoCompraItem.getQuantidade()%>" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
+									<a class="cart_quantity_up" href="AdicionarProdutoCarrinho?produtoId=<%= carrinhoCompraItem.getProduto().getId()%>" > + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" value="<%= carrinhoCompraItem.getQuantidade()%>" autocomplete="off" size="2" disabled="true">
+									<a class="cart_quantity_down" href="DecrementarProdutoCarrinho?produtoId=<%= carrinhoCompraItem.getProduto().getId()%>"> - </a>
 								</div>
 							</td>
 							<td class="cart_total">
@@ -112,12 +148,19 @@
 				        <%
 				            }
 				        %>
-					
-						
+ 
 					</tbody>
 				</table>
 			</div>
+			<div class="btncontainer"> 
+				<%if (usuario != null) { %>			       
+					<button type="submit" >Comprar</button>
+				<% } %> 								  									  	
+				<button onclick="window.location.replace('Inicio');" type="button" class="cancelbtn">Voltar</button>
+			</div>
+
 		</div>
 	</section> <!--/#cart_items-->
+</form>
 </body>
 </html>
