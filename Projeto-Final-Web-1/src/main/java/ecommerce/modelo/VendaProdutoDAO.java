@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,7 +12,7 @@ import java.util.List;
  *
  * Classe que implementa o padrão DAO para a entidade produto
  */
-public class VendaDAO {
+public class VendaProdutoDAO {
 
 	String driver = "org.postgresql.Driver";
 	String url = "jdbc:postgresql://localhost:5432/db_ecommerce";
@@ -60,250 +58,6 @@ public class VendaDAO {
 		return produto;
 	}
 
-	public List<Venda> obterTodasVendasUsuario(int idUsuario, boolean fecharConexao) throws Exception {
-
-		VendaProduto vendaProduto = null;
-		Venda venda = new Venda();
-		List<Venda> vendasUsuario = new ArrayList<Venda>();
-
-		Class.forName(driver);
-		Connection connection = DriverManager.getConnection(url, user, password);
-
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, data_hora FROM venda WHERE id_usuario = ?");
-		preparedStatement.setInt(1, idUsuario);
-		ResultSet resultSet = preparedStatement.executeQuery();
-
-		while (resultSet.next()) {
-			venda = new Venda();
-			venda.setId(resultSet.getInt("id"));
-			venda.setData(resultSet.getTimestamp("data_hora"));
-			venda.setIdUsuario(idUsuario);
-
-			vendasUsuario.add(venda);		
-		}
-
-		for (Venda vendaEncontradaUsuario : vendasUsuario) {
-
-			preparedStatement = connection.prepareStatement("SELECT vp.quantidade, vp.id_produto, p.preco, p.nome, p.descricao "
-					+ " FROM venda_produto vp INNER JOIN produto p ON p.id=vp.id_produto WHERE vp.id_venda = ?");
-			preparedStatement.setInt(1, vendaEncontradaUsuario.getId());
-			resultSet = preparedStatement.executeQuery();
-			
-			vendaEncontradaUsuario.setProdutosVendidos(new ArrayList<VendaProduto>());;
-
-			double precoTotal = 0;
-			
-			while (resultSet.next()) {
-				vendaProduto = new VendaProduto();
-				vendaProduto.setIdVenda(vendaEncontradaUsuario.getId());
-				vendaProduto.setQuantidade(resultSet.getInt("quantidade"));
-				vendaProduto.setIdProduto(resultSet.getInt("id_produto"));
-				vendaProduto.setPreco(resultSet.getDouble("preco"));
-				vendaProduto.setNome(resultSet.getString("nome"));
-				vendaProduto.setDescricao(resultSet.getString("descricao"));
-				precoTotal = precoTotal + vendaProduto.getQuantidade()*vendaProduto.getPreco();
-				
-				vendaEncontradaUsuario.getProdutosVendidos().add(vendaProduto);
-			}
-			
-			vendaEncontradaUsuario.setTotalVenda(precoTotal);
-		}
-
-		if (fecharConexao) {
-			resultSet.close();
-			preparedStatement.close();
-			connection.close();
-		}
-
-		/*if (vendaProduto == null) {
-			throw new Exception("Venda não encontrada");
-		}*/
-
-		return vendasUsuario;
-	}
-
-	public List<Venda> obterTodasVendas( boolean fecharConexao) throws Exception {
-
-		VendaProduto vendaProduto = null;
-		Venda venda = new Venda();
-		List<Venda> vendasUsuario = new ArrayList<Venda>();
-
-		Class.forName(driver);
-		Connection connection = DriverManager.getConnection(url, user, password);
-
-		PreparedStatement preparedStatement = connection.prepareStatement(
-				"SELECT v.id id_venda, v.data_hora, u.nome, u.id id_usuario FROM venda v"
-				+ " INNER JOIN usuario u ON u.id = v.id_usuario ");
-
-		ResultSet resultSet = preparedStatement.executeQuery();
-
-		while (resultSet.next()) {
-			venda = new Venda();
-			venda.setId(resultSet.getInt("id_venda"));
-			venda.setData(resultSet.getTimestamp("data_hora"));
-			venda.setNomeUsuario(resultSet.getString("nome"));
-			venda.setIdUsuario(resultSet.getInt("id_usuario"));
-
-			vendasUsuario.add(venda);		
-		}
-
-		for (Venda vendaEncontradaUsuario : vendasUsuario) {
-
-			preparedStatement = connection.prepareStatement("SELECT vp.quantidade, vp.id_produto, p.preco, p.nome, p.descricao "
-					+ " FROM venda_produto vp INNER JOIN produto p ON p.id=vp.id_produto WHERE vp.id_venda = ?");
-			preparedStatement.setInt(1, vendaEncontradaUsuario.getId());
-			resultSet = preparedStatement.executeQuery();
-			
-			vendaEncontradaUsuario.setProdutosVendidos(new ArrayList<VendaProduto>());;
-
-			double precoTotal = 0;
-			
-			while (resultSet.next()) {
-				vendaProduto = new VendaProduto();
-				vendaProduto.setIdVenda(vendaEncontradaUsuario.getId());
-				vendaProduto.setQuantidade(resultSet.getInt("quantidade"));
-				vendaProduto.setIdProduto(resultSet.getInt("id_produto"));
-				vendaProduto.setPreco(resultSet.getDouble("preco"));
-				vendaProduto.setNome(resultSet.getString("nome"));
-				vendaProduto.setDescricao(resultSet.getString("descricao"));
-				precoTotal = precoTotal + vendaProduto.getQuantidade()*vendaProduto.getPreco();
-				
-				vendaEncontradaUsuario.getProdutosVendidos().add(vendaProduto);
-			}
-			
-			vendaEncontradaUsuario.setTotalVenda(precoTotal);
-		}
-
-		if (fecharConexao) {
-			resultSet.close();
-			preparedStatement.close();
-			connection.close();
-		}
-
-		/*if (vendaProduto == null) {
-			throw new Exception("Venda não encontrada");
-		}*/
-
-		return vendasUsuario;
-	}
-	
-	public List<ItemRelatorioClientePeriodo> obterRelatorioComprasPeriodo(Date inicio, Date fim, boolean fecharConexao) throws Exception {
-
-		VendaProduto vendaProduto = null;
-		ItemRelatorioClientePeriodo venda = new ItemRelatorioClientePeriodo();
-		List<ItemRelatorioClientePeriodo> vendasUsuario = new ArrayList<ItemRelatorioClientePeriodo>();
-
-		Class.forName(driver);
-		Connection connection = DriverManager.getConnection(url, user, password);
-
-		PreparedStatement preparedStatement = connection.prepareStatement(
-				"SELECT u.id, u.nome, count(*) qde FROM venda v "
-				+ " INNER JOIN usuario u ON u.id = v.id_usuario WHERE v.data_hora >= ? "
-				+ " AND v.data_hora <= ? GROUP BY u.id, u.nome "
-				+ " ORDER BY qde ");
-		preparedStatement.setTimestamp(1, new Timestamp(inicio.getTime()));
-		preparedStatement.setTimestamp(2, new Timestamp(fim.getTime()));
-		ResultSet resultSet = preparedStatement.executeQuery();
-
-		while (resultSet.next()) {
-			venda = new ItemRelatorioClientePeriodo();
-			venda.setId(resultSet.getInt("id"));
-			venda.setNome(resultSet.getString("nome"));
-			venda.setQuantidadeCompras(resultSet.getInt("qde"));
-
-			vendasUsuario.add(venda);		
-		}
-
-		
-
-		if (fecharConexao) {
-			resultSet.close();
-			preparedStatement.close();
-			connection.close();
-		}
-
-		/*if (vendaProduto == null) {
-			throw new Exception("Venda não encontrada");
-		}*/
-
-		return vendasUsuario;
-	}
-	
-	
-	public List<ItemRelatorioValorPorDia> obterRelatorioComprasPorDia( boolean fecharConexao) throws Exception {
-
-		ItemRelatorioValorPorDia venda = new ItemRelatorioValorPorDia();
-		List<ItemRelatorioValorPorDia> vendasUsuario = new ArrayList<ItemRelatorioValorPorDia>();
-
-		Class.forName(driver);
-		Connection connection = DriverManager.getConnection(url, user, password);
-
-		PreparedStatement preparedStatement = connection.prepareStatement(
-				"SELECT date(v.data_hora) data_compra, SUM(vp.quantidade*p.preco) total FROM venda v "
-				+ " INNER JOIN venda_produto vp ON vp.id_venda = v.id "
-				+ " INNER JOIN produto p ON p.id = vp.id_produto "
-				+ "  GROUP BY date(v.data_hora) "
-				+ " ORDER BY data_compra ");
-
-		ResultSet resultSet = preparedStatement.executeQuery();
-
-		while (resultSet.next()) {
-			venda = new ItemRelatorioValorPorDia();
-			venda.setData(resultSet.getDate("data_compra") );
-			venda.setValor(Double.parseDouble(resultSet.getString("total")));
-
-			vendasUsuario.add(venda);		
-		}
-
-		if (fecharConexao) {
-			resultSet.close();
-			preparedStatement.close();
-			connection.close();
-		}
-
-		return vendasUsuario;
-	}
-
-/*	public List<VendaProduto> obterVendasUsuario(int idUsuario, boolean fecharConexao) throws Exception {
-
-		VendaProduto vendaProduto = null;
-		Venda venda = new Venda();
-		List<VendaProduto> produtosVenda = new ArrayList<VendaProduto>();
-		List<Venda> vendas = new ArrayList<Venda>();
-
-		Class.forName(driver);
-		Connection connection = DriverManager.getConnection(url, user, password);
-
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto, nome, ativo FROM produto WHERE id = ?");
-		preparedStatement.setInt(1, idUsuario);
-		ResultSet resultSet = preparedStatement.executeQuery();
-
-
-		while (resultSet.next()) {
-			vendaProduto = new Produto();
-			vendaProduto.setId(resultSet.getInt("id"));
-			vendaProduto.setDescricao(resultSet.getString("descricao"));
-			vendaProduto.setQuantidade(resultSet.getInt("quantidade"));
-			vendaProduto.setPreco(resultSet.getDouble("preco"));
-			vendaProduto.setFoto(resultSet.getString("foto"));
-			vendaProduto.setNome(resultSet.getString("nome"));
-			vendaProduto.setAtivo(resultSet.getBoolean("ativo"));
-
-			if (resultSet.wasNull()) {
-				vendaProduto.setFoto(null);
-			}
-		}
-		if (fecharConexao) {
-			resultSet.close();
-			preparedStatement.close();
-			connection.close();
-		}
-		if (vendaProduto == null) {
-			throw new Exception("Produto não encontrado");
-		}
-		return vendaProduto;
-	}
-*/
 	/**
 	 * Método utilizado para obter uma lista de produtos disponíveis em estoque
 	 *
@@ -420,21 +174,23 @@ public class VendaDAO {
 	 * @param administrador
 	 * @throws Exception
 	 */
-	public void inserir(int id, Timestamp data, int idUsuario, boolean fecharConexao) throws Exception {
+	public void inserir(String nome, int codigo, String foto, double preco, String descricao, int quantidade, boolean fecharConexao) throws Exception {
 		Class.forName(driver);
 		Connection connection = DriverManager.getConnection(url, user, password);
-		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO venda (id, data_hora, id_usuario) VALUES (?, ?, ?)");
-		preparedStatement.setInt(1, id);
-		preparedStatement.setTimestamp(2,  data);
-		preparedStatement.setInt(3, idUsuario);
-
+		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO produto (nome, id, foto, preco, descricao, quantidade) VALUES (?, ?, ?, ?, ?, ?)");
+		preparedStatement.setString(1, nome);
+		preparedStatement.setInt(2, codigo);
+		preparedStatement.setString(3, foto);
+		preparedStatement.setDouble(4, preco);
+		preparedStatement.setString(5, descricao);
+		preparedStatement.setInt(6, quantidade);
 		int resultado = preparedStatement.executeUpdate();
 		if (fecharConexao) {
 			preparedStatement.close();
 			connection.close();
 		}
 		if (resultado != 1) {
-			throw new Exception("Não foi possível inserir a venda");
+			throw new Exception("Não foi possível inserir o produto");
 		}
 	}
 
@@ -442,21 +198,19 @@ public class VendaDAO {
 	 * Método utilizado para inserir uma nova categoria do produto
 	 *
 	 */
-	public void inserirVendaProduto(int idProduto, int idVenda, int quantidade, boolean fecharConexao) throws Exception {
+	public void inserirCategoriaProduto(int idProduto, int idCategoria, boolean fecharConexao) throws Exception {
 		Class.forName(driver);
 		Connection connection = DriverManager.getConnection(url, user, password);
-		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO venda_produto (id_produto, id_venda, quantidade) VALUES (?, ?, ?)");
+		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO produto_categoria (id_produto, id_categoria) VALUES (?, ?)");
 		preparedStatement.setInt(1, idProduto);
-		preparedStatement.setInt(2, idVenda);
-		preparedStatement.setInt(3, quantidade);
-
+		preparedStatement.setInt(2, idCategoria);
 		int resultado = preparedStatement.executeUpdate();
 		if (fecharConexao) {
 
 			preparedStatement.close();
 			connection.close();}
 		if (resultado != 1) {
-			throw new Exception("Não foi possível inserir a venda do produto");
+			throw new Exception("Não foi possível inserir a categoria do produto");
 		}
 	}
 
@@ -537,9 +291,10 @@ public class VendaDAO {
 	public void desativar(int codigo) throws Exception {
 		Class.forName(driver);
 		Connection connection = DriverManager.getConnection(url, user, password);
-		String sql = " DELETE FROM venda WHERE id = ? ";
+		String sql = "UPDATE produto SET ativo = ? WHERE id = ? ";
 		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setInt(1, codigo);
+		preparedStatement.setBoolean(1, false);
+		preparedStatement.setInt(2, codigo);
 
 		int resultado = preparedStatement.executeUpdate();
 		preparedStatement.close();

@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.modelo.ItemRelatorioValorPorDia"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +73,9 @@
 					<tbody>
 
 						<%
+						String format = "0.00";
+						NumberFormat formatter = new DecimalFormat(format);
+						String newDVal;
 				            List<ItemRelatorioValorPorDia> produtosEncontados = (List<ItemRelatorioValorPorDia>) request.getAttribute("vendasEncontradas");
 				            if (produtosEncontados == null || produtosEncontados.size() == 0) {
 				        %>
@@ -87,7 +93,7 @@
 								<p><%= produtoEncontrado.getDataString()%></p>
 							</td>
 							<td class="cart_description">
-								<p><%= produtoEncontrado.getValor()%></p>
+								<p><%= formatter.format(produtoEncontrado.getValor())%> </p>
 							</td>
 						</tr>
 

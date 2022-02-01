@@ -3,6 +3,8 @@
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.modelo.Produto"%>
 <%@page import="ecommerce.modelo.Venda"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
 
 <!DOCTYPE html>
 <html>
@@ -66,6 +68,8 @@
 					<tbody>
 					
 						<%
+						String format = "0.00";
+						NumberFormat formatter = new DecimalFormat(format);
 				            List<Venda> produtosEncontados = (List<Venda>) request.getAttribute("vendasEncontradas");
 				            if (produtosEncontados == null || produtosEncontados.size() == 0) {
 				        %>
@@ -84,10 +88,11 @@
 							</td>
 
 							<td class="cart_price">
-								<p><%= produtoEncontrado.getData()%></p>
+								<p><%= produtoEncontrado.getDataString()%></p>
 							</td>
 							<td class="cart_price">
-								<p><%= produtoEncontrado.getTotalVenda()%></p>
+								<p>
+								<%= formatter.format(produtoEncontrado.getTotalVenda())%></p>
 							</td>							
 						</tr>
 				        				    

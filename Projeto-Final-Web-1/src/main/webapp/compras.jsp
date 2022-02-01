@@ -90,8 +90,10 @@
 										<li><a href="produtos.jsp">Produtos</a></li>
 										<li><a href="categorias.jsp"> Categorias</a></li>
 										<li><a href="relatorios.jsp"> Relatórios</a></li>
-									<% } %>
-									<li><a href="comprasUsuario?idUsuario=<%= usuario.getId() %>"> Minhas compras</a> </li>	
+										<li><a href="comprasUsuarioAdmin?idUsuario=<%= usuario.getId() %>"> Compras</a> </li>										
+									<% } else { %>
+									<li><a href="comprasUsuario?idUsuario=<%= usuario.getId() %>"> Minhas compras</a> </li>
+									<%} %>	
 									<li><a href="dadosUsuario?login=<%= usuario.getLogin() %>"> Dados Pessoais</a></li>														
 									<li><a href="Logout"> Sair</a></li>
 								<%} %>

@@ -10,6 +10,9 @@
 <%@page import="ecommerce.modelo.CarrinhoCompraItem"%>
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.modelo.Produto"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.text.DecimalFormat"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -92,6 +95,9 @@
 					<tbody>
 					
 						<%
+						String format = "0.00";
+						NumberFormat formatter = new DecimalFormat(format);
+						String newDVal;
 				            List<CarrinhoCompraItem> carrinhoCompraItens = (List<CarrinhoCompraItem>) request.getAttribute("carrinhoCompraItens");
 				            if (carrinhoCompraItens == null || carrinhoCompraItens.size() == 0) {
 				        %>
@@ -102,7 +108,10 @@
 					            for (int i = 0; i < carrinhoCompraItens.size(); i++) {
 					                CarrinhoCompraItem carrinhoCompraItem = carrinhoCompraItens.get(i);
 				        %>
-				        
+
+        						<%
+        						 newDVal = formatter.format(carrinhoCompraItem.getProduto().getPreco());        
+        						 %>
 				        <tr>
 							<td class="cart_product">
 								<a href=""><img src="images/cart/one.png" alt=""></a>
@@ -112,7 +121,8 @@
 								<p>ID: <%= carrinhoCompraItem.getProduto().getId()%></p>
 							</td>
 							<td class="cart_price">
-								<p>R$ <%= carrinhoCompraItem.getProduto().getPreco()%></p>
+
+								<p>R$ <%= newDVal %></p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
@@ -122,7 +132,9 @@
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">R$ <%= carrinhoCompraItem.getProduto().getPreco() * carrinhoCompraItem.getQuantidade()%></p>
+								<p class="cart_total_price">R$ 
+								<%  newDVal = formatter.format(carrinhoCompraItem.getProduto().getPreco() * carrinhoCompraItem.getQuantidade()); %> 
+								<%= newDVal %></p>
 							</td>
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href="RemoverProdutoCarrinhoCompra?produtoId=<%= carrinhoCompraItem.getProduto().getId()%>"><i class="fa fa-times"></i></a>
@@ -142,7 +154,10 @@
 					        	<p class="cart_total_price">Total </p>
 					        </td>
 					        <td>
-					        	<p class="cart_total_price"> R$ <%= total%></p>
+					        	<p class="cart_total_price"> R$ 
+					        	<%  newDVal = formatter.format(total); %> 
+								<%= newDVal %></p>
+					        	</p>
 					        </td>
 				        </tr>
 				        <%
@@ -153,7 +168,7 @@
 				</table>
 			</div>
 			<div class="btncontainer"> 
-				<%if (usuario != null) { %>			       
+				<%if (usuario != null && !carrinhoCompraItens.isEmpty()) { %>			       
 					<button type="submit" >Comprar</button>
 					<input type="hidden" name="idUsuarioA" value="<%= usuario.getId()%>" />	  
 					

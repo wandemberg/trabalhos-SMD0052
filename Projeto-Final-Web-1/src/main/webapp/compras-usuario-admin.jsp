@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="ecommerce.modelo.Produto"%>
+<%@page import="ecommerce.modelo.Venda"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.text.DecimalFormat"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +40,7 @@
 				  <li class="active">Produtos</li>
 				</ol>
 			</div>
-<h2>Produtos - Loja Virtual</h2>
+	<h2>Compras realizadas - Loja Virtual</h2>
 
   
 	<% if (request.getAttribute("mensagem") != null) { %>
@@ -47,8 +49,8 @@
     <hr/>
         
      <% } %>
-     	
-  
+       	
+
 <section id="cart_items">
 		<div class="container">
 
@@ -56,10 +58,12 @@
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
-							<td class="image">Código</td>
-							<td class="description">Nome</td>
-							<td class="price">Descrição</td>
-							<td class="total">Custo unitário</td>						
+							<td class="image">Código da Compra</td>
+							<td class="image">Data da Compra</td>
+							<td class="image">Nome do Usuário</td>
+							<td class="description">Total</td>							
+							<td></td>
+							<td></td>							
 						</tr>
 					</thead>
 					<tbody>
@@ -67,34 +71,39 @@
 						<%
 						String format = "0.00";
 						NumberFormat formatter = new DecimalFormat(format);
-				            List<Produto> produtosEncontados = (List<Produto>) request.getAttribute("produtosEncontrados");
+						String newDVal;
+				            List<Venda> produtosEncontados = (List<Venda>) request.getAttribute("vendasEncontradas");
 				            if (produtosEncontados == null || produtosEncontados.size() == 0) {
 				        %>
-				        <div>Não existem produtos faltando no estoque!</div>
+				        <div>Não existem compras para usuário!</div>
 				        <br>
 				        <%
 					        } else {
 					            double total = 0;
 					            for (int i = 0; i < produtosEncontados.size(); i++) {
-					            	Produto produtoEncontrado = produtosEncontados.get(i);
+					            	Venda produtoEncontrado = produtosEncontados.get(i);
 				        %>
 				        
 				        <tr>
 							<td class="cart_price">
-								<p><%= produtoEncontrado.getId()%></p>
-							</td>							
-							<td class="cart_description">
-								<h4><a href=""><%= produtoEncontrado.getNome()%></a></h4>
-								<p>ID: <%= produtoEncontrado.getId()%></p>
+								<p><%= produtoEncontrado.getId() %></p>
 							</td>
-							<td class="cart_description">
-								<h4><a href=""><%= produtoEncontrado.getDescricao()%></a></h4>
-							</td>						
 							<td class="cart_price">
-								<p>R$ <%= formatter.format(produtoEncontrado.getPreco())%>
-								</p>								
+								<p><%= produtoEncontrado.getDataString()%></p>
+							</td>							
+							<td class="cart_price">
+								<p><%= produtoEncontrado.getNomeUsuario()%></p>
 							</td>
-							
+							<td class="cart_price">
+								<p>R$ <%= formatter.format(produtoEncontrado.getTotalVenda()) %> 
+								</p>
+								</td>
+							<td>	
+								<form action="removerCompra" method="post">
+									<input type="hidden" name="codigoCompra" value="<%= produtoEncontrado.getId()%>" />																
+									<button class="btn" title="Excluir"><i class="fa fa-trash"></i></button>
+								</form>
+							</td>							
 						</tr>
 				        				    
 				        <%

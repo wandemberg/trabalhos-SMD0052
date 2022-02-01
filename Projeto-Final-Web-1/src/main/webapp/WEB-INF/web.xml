@@ -97,6 +97,10 @@
         <servlet-class>ecommerce.controle.ComprasUsuarioServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ComprasUsuarioAdminServlet</servlet-name>
+        <servlet-class>ecommerce.controle.ComprasUsuarioAdminServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>TotalComprasClientePeriodoServlet</servlet-name>
         <servlet-class>ecommerce.controle.TotalComprasClientePeriodoServlet</servlet-class>
     </servlet>  
@@ -107,7 +111,11 @@
     <servlet>
         <servlet-name>ProdutosFaltandoEstoqueServlet</servlet-name>
         <servlet-class>ecommerce.controle.ProdutosFaltandoEstoqueServlet</servlet-class>
-    </servlet>              
+    </servlet>
+    <servlet>
+        <servlet-name>RemoverCompraServlet</servlet-name>
+        <servlet-class>ecommerce.controle.RemoverCompraServlet</servlet-class>
+    </servlet>                
     <servlet-mapping>
         <servlet-name>NovoClienteServlet</servlet-name>
         <url-pattern>/NovoCliente</url-pattern>
@@ -205,6 +213,10 @@
         <url-pattern>/comprasUsuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ComprasUsuarioAdminServlet</servlet-name>
+        <url-pattern>/comprasUsuarioAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>TotalComprasClientePeriodoServlet</servlet-name>
         <url-pattern>/totalComprasClientePeriodo</url-pattern>
     </servlet-mapping>  
@@ -215,7 +227,11 @@
     <servlet-mapping>
         <servlet-name>ProdutosFaltandoEstoqueServlet</servlet-name>
         <url-pattern>/produtosFaltandoEstoque</url-pattern>
-    </servlet-mapping>                              
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoverCompraServlet</servlet-name>
+        <url-pattern>/removerCompra</url-pattern>
+    </servlet-mapping>                               
     <session-config>
         <session-timeout>
             30
