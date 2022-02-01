@@ -1,12 +1,15 @@
 package ecommerce.modelo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Venda {
 
 	private int id;
 	private Date data;
 	private int idUsuario;
+	private List<VendaProduto> produtosVendidos;
+	private Double totalVenda;
 	
 	public int getId() {
 		return id;
@@ -25,6 +28,18 @@ public class Venda {
 	}
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+	public List<VendaProduto> getProdutosVendidos() {
+		return produtosVendidos;
+	}
+	public void setProdutosVendidos(List<VendaProduto> produtosVendidos) {
+		this.produtosVendidos = produtosVendidos;
+	}
+	public Double getTotalVenda() {
+		return totalVenda;
+	}
+	public void setTotalVenda(Double totalVenda) {
+		this.totalVenda = totalVenda;
 	}
 	
 }

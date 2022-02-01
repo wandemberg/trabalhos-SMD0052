@@ -60,6 +60,109 @@ public class VendaDAO {
 		return produto;
 	}
 
+	public List<Venda> obterTodasVendasUsuario(int idUsuario, boolean fecharConexao) throws Exception {
+
+		VendaProduto vendaProduto = null;
+		Venda venda = new Venda();
+		List<Venda> vendasUsuario = new ArrayList<Venda>();
+
+		Class.forName(driver);
+		Connection connection = DriverManager.getConnection(url, user, password);
+
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, data_hora FROM venda WHERE id_usuario = ?");
+		preparedStatement.setInt(1, idUsuario);
+		ResultSet resultSet = preparedStatement.executeQuery();
+
+		while (resultSet.next()) {
+			venda = new Venda();
+			venda.setId(resultSet.getInt("id"));
+			venda.setData(resultSet.getTimestamp("data_hora"));
+			venda.setIdUsuario(idUsuario);
+
+			vendasUsuario.add(venda);		
+		}
+
+		for (Venda vendaEncontradaUsuario : vendasUsuario) {
+
+			preparedStatement = connection.prepareStatement("SELECT vp.quantidade, vp.id_produto, p.preco, p.nome, p.descricao "
+					+ " FROM venda_produto vp INNER JOIN produto p ON p.id=vp.id_produto WHERE vp.id_venda = ?");
+			preparedStatement.setInt(1, vendaEncontradaUsuario.getId());
+			resultSet = preparedStatement.executeQuery();
+			
+			vendaEncontradaUsuario.setProdutosVendidos(new ArrayList<VendaProduto>());;
+
+			double precoTotal = 0;
+			
+			while (resultSet.next()) {
+				vendaProduto = new VendaProduto();
+				vendaProduto.setIdVenda(vendaEncontradaUsuario.getId());
+				vendaProduto.setQuantidade(resultSet.getInt("quantidade"));
+				vendaProduto.setIdProduto(resultSet.getInt("id_produto"));
+				vendaProduto.setPreco(resultSet.getDouble("preco"));
+				vendaProduto.setNome(resultSet.getString("nome"));
+				vendaProduto.setDescricao(resultSet.getString("descricao"));
+				precoTotal = precoTotal + vendaProduto.getQuantidade()*vendaProduto.getPreco();
+				
+				vendaEncontradaUsuario.getProdutosVendidos().add(vendaProduto);
+			}
+			
+			vendaEncontradaUsuario.setTotalVenda(precoTotal);
+		}
+
+		if (fecharConexao) {
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}
+
+		/*if (vendaProduto == null) {
+			throw new Exception("Venda não encontrada");
+		}*/
+
+		return vendasUsuario;
+	}
+
+
+/*	public List<VendaProduto> obterVendasUsuario(int idUsuario, boolean fecharConexao) throws Exception {
+
+		VendaProduto vendaProduto = null;
+		Venda venda = new Venda();
+		List<VendaProduto> produtosVenda = new ArrayList<VendaProduto>();
+		List<Venda> vendas = new ArrayList<Venda>();
+
+		Class.forName(driver);
+		Connection connection = DriverManager.getConnection(url, user, password);
+
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, descricao, quantidade, preco, foto, nome, ativo FROM produto WHERE id = ?");
+		preparedStatement.setInt(1, idUsuario);
+		ResultSet resultSet = preparedStatement.executeQuery();
+
+
+		while (resultSet.next()) {
+			vendaProduto = new Produto();
+			vendaProduto.setId(resultSet.getInt("id"));
+			vendaProduto.setDescricao(resultSet.getString("descricao"));
+			vendaProduto.setQuantidade(resultSet.getInt("quantidade"));
+			vendaProduto.setPreco(resultSet.getDouble("preco"));
+			vendaProduto.setFoto(resultSet.getString("foto"));
+			vendaProduto.setNome(resultSet.getString("nome"));
+			vendaProduto.setAtivo(resultSet.getBoolean("ativo"));
+
+			if (resultSet.wasNull()) {
+				vendaProduto.setFoto(null);
+			}
+		}
+		if (fecharConexao) {
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}
+		if (vendaProduto == null) {
+			throw new Exception("Produto não encontrado");
+		}
+		return vendaProduto;
+	}
+*/
 	/**
 	 * Método utilizado para obter uma lista de produtos disponíveis em estoque
 	 *

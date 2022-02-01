@@ -91,6 +91,10 @@
     <servlet>
         <servlet-name>UsuarioServlet</servlet-name>
         <servlet-class>ecommerce.controle.UsuarioServlet</servlet-class>
+    </servlet>       
+    <servlet>
+        <servlet-name>ComprasUsuarioServlet</servlet-name>
+        <servlet-class>ecommerce.controle.ComprasUsuarioServlet</servlet-class>
     </servlet>            
     <servlet-mapping>
         <servlet-name>NovoClienteServlet</servlet-name>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/dadosUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComprasUsuarioServlet</servlet-name>
+        <url-pattern>/comprasUsuario</url-pattern>
     </servlet-mapping>                            
     <session-config>
         <session-timeout>

@@ -42,8 +42,9 @@ public class FinalizarCompraDoCarrinhoServlet extends HttpServlet {
 		boolean produtosDiponiveis = true;
 		String produtosIndisponiveis = " Só existem em estoque: ";
 
-        String idUsuario = request.getParameter("idUsuario");
-        Integer idUsuarioInt = idUsuario!=null ? Integer.parseInt(idUsuario) : 4;
+        String idUsuario = request.getParameter("idUsuarioA");
+        //request.getParameter("idUsuario");
+        Integer idUsuarioInt = idUsuario!=null ? Integer.parseInt(idUsuario) : 1;
 
 
 		for (CarrinhoCompraItem item : carrinhoCompraItens) {        	

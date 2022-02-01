@@ -155,6 +155,8 @@
 			<div class="btncontainer"> 
 				<%if (usuario != null) { %>			       
 					<button type="submit" >Comprar</button>
+					<input type="hidden" name="idUsuarioA" value="<%= usuario.getId()%>" />	  
+					
 				<% } %> 								  									  	
 				<button onclick="window.location.replace('Inicio');" type="button" class="cancelbtn">Voltar</button>
 			</div>

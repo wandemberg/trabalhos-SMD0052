@@ -1,6 +1,10 @@
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
 	request.setAttribute("usuario", usuario);
+	
+	if (usuario!=null)
+		request.setAttribute("idUsuarioAtr", usuario.getId());
+
 
    /* if (usuario == null) {
         request.setAttribute("mensagem", "Você não tem uma sessão válida de usuário do tipo cliente");
@@ -85,9 +89,9 @@
 									<%if (usuario.isAdministrador()) { %>
 										<li><a href="produtos.jsp">Produtos</a></li>
 										<li><a href="categorias.jsp"> Categorias</a></li>									
-									<% } %>	
-									<li>																	
-									<a href="dadosUsuario?login=<%= usuario.getLogin()%>"> Dados Pessoais</a></li>														
+									<% } %>
+									<li><a href="comprasUsuario?idUsuario=<%= usuario.getId() %>"> Minhas compras</a> </li>	
+									<li><a href="dadosUsuario?login=<%= usuario.getLogin() %>"> Dados Pessoais</a></li>														
 									<li><a href="Logout"> Sair</a></li>
 								<%} %>
 							</ul>
