@@ -2,7 +2,6 @@ package ecommerce.controle;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -25,6 +24,7 @@ import ecommerce.modelo.VendaDAO;
  * Servlet que implementa a camada de controle da ação de finalizar uma compra 
  * do carrinho de compras
  */
+@SuppressWarnings("serial")
 public class FinalizarCompraDoCarrinhoServlet extends HttpServlet {
 
 	@Override

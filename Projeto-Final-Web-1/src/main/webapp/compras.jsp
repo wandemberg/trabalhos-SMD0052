@@ -88,7 +88,8 @@
 								<%if (usuario != null) { %>	
 									<%if (usuario.isAdministrador()) { %>
 										<li><a href="produtos.jsp">Produtos</a></li>
-										<li><a href="categorias.jsp"> Categorias</a></li>									
+										<li><a href="categorias.jsp"> Categorias</a></li>
+										<li><a href="relatorios.jsp"> Relatórios</a></li>
 									<% } %>
 									<li><a href="comprasUsuario?idUsuario=<%= usuario.getId() %>"> Minhas compras</a> </li>	
 									<li><a href="dadosUsuario?login=<%= usuario.getLogin() %>"> Dados Pessoais</a></li>														

@@ -122,6 +122,82 @@ public class VendaDAO {
 		return vendasUsuario;
 	}
 
+	public List<ItemRelatorioClientePeriodo> obterRelatorioComprasPeriodo(Date inicio, Date fim, boolean fecharConexao) throws Exception {
+
+		VendaProduto vendaProduto = null;
+		ItemRelatorioClientePeriodo venda = new ItemRelatorioClientePeriodo();
+		List<ItemRelatorioClientePeriodo> vendasUsuario = new ArrayList<ItemRelatorioClientePeriodo>();
+
+		Class.forName(driver);
+		Connection connection = DriverManager.getConnection(url, user, password);
+
+		PreparedStatement preparedStatement = connection.prepareStatement(
+				"SELECT u.id, u.nome, count(*) qde FROM venda v "
+				+ " INNER JOIN usuario u ON u.id = v.id_usuario WHERE v.data_hora >= ? "
+				+ " AND v.data_hora <= ? GROUP BY u.id, u.nome "
+				+ " ORDER BY qde ");
+		preparedStatement.setTimestamp(1, new Timestamp(inicio.getTime()));
+		preparedStatement.setTimestamp(2, new Timestamp(fim.getTime()));
+		ResultSet resultSet = preparedStatement.executeQuery();
+
+		while (resultSet.next()) {
+			venda = new ItemRelatorioClientePeriodo();
+			venda.setId(resultSet.getInt("id"));
+			venda.setNome(resultSet.getString("nome"));
+			venda.setQuantidadeCompras(resultSet.getInt("qde"));
+
+			vendasUsuario.add(venda);		
+		}
+
+		
+
+		if (fecharConexao) {
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}
+
+		/*if (vendaProduto == null) {
+			throw new Exception("Venda não encontrada");
+		}*/
+
+		return vendasUsuario;
+	}
+	
+	
+	public List<ItemRelatorioValorPorDia> obterRelatorioComprasPorDia( boolean fecharConexao) throws Exception {
+
+		ItemRelatorioValorPorDia venda = new ItemRelatorioValorPorDia();
+		List<ItemRelatorioValorPorDia> vendasUsuario = new ArrayList<ItemRelatorioValorPorDia>();
+
+		Class.forName(driver);
+		Connection connection = DriverManager.getConnection(url, user, password);
+
+		PreparedStatement preparedStatement = connection.prepareStatement(
+				"SELECT date(v.data_hora) data_compra, SUM(vp.quantidade*p.preco) total FROM venda v "
+				+ " INNER JOIN venda_produto vp ON vp.id_venda = v.id "
+				+ " INNER JOIN produto p ON p.id = vp.id_produto "
+				+ "  GROUP BY date(v.data_hora) "
+				+ " ORDER BY data_compra ");
+
+		ResultSet resultSet = preparedStatement.executeQuery();
+
+		while (resultSet.next()) {
+			venda = new ItemRelatorioValorPorDia();
+			venda.setData(resultSet.getDate("data_compra") );
+			venda.setValor(Double.parseDouble(resultSet.getString("total")));
+
+			vendasUsuario.add(venda);		
+		}
+
+		if (fecharConexao) {
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}
+
+		return vendasUsuario;
+	}
 
 /*	public List<VendaProduto> obterVendasUsuario(int idUsuario, boolean fecharConexao) throws Exception {
 

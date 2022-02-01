@@ -90,6 +90,43 @@ public class ProdutoDAO {
 		connection.close();
 		return produtos;
 	}
+	
+	/**
+	 * Método utilizado para obter uma lista de produtos disponíveis em estoque
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Produto> obterProdutosFaltandoEmEstoque() throws Exception {
+		List<Produto> produtos = new ArrayList<>();
+		Class.forName(driver);
+		Connection connection = DriverManager.getConnection(url, user, password);
+		PreparedStatement preparedStatement = connection.prepareStatement(
+				"SELECT id, nome, descricao, quantidade, preco, foto, ativo "
+				+ " FROM produto "
+				+ " WHERE quantidade < 1 "
+				+ " ORDER BY descricao");
+		ResultSet resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			Produto produto = new Produto();
+			produto.setId(resultSet.getInt("id"));
+			produto.setDescricao(resultSet.getString("descricao"));
+			produto.setQuantidade(resultSet.getInt("quantidade"));
+			produto.setPreco(resultSet.getDouble("preco"));
+			produto.setFoto(resultSet.getString("foto"));
+			produto.setNome(resultSet.getString("nome"));
+			produto.setAtivo(resultSet.getBoolean("ativo"));
+
+			if (resultSet.wasNull()) {
+				produto.setFoto(null);
+			}
+			produtos.add(produto);
+		}
+		resultSet.close();
+		preparedStatement.close();
+		connection.close();
+		return produtos;
+	}
 
 	/**
 	 * Método utilizado para obter uma lista de produtos pesquisado
